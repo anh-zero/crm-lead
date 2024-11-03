@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #F4F5F6;
+}
+
+.clear{
+    clear: both;
+}
+/* ================================== */
+
+.all{
+    background-color: #F4F5F6;
+}
+
+header{
+    width: 100%;
+    height: 74px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 0 gray;
+}
+
+.a{
+    width: 1290px;
+    height: 74px;
+    background-color: #fff;
+    margin: 0 auto;
+    position: relative;
+}
+
+.a1{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    transform: translate(0, 50%);
+}
+
+.a1_component{
+    color: #4c5267;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #fff;
+    font-weight: 400;
+}
+
+#a1_title{
+    font-size: 18px;
+    padding: 16px 8px 16px 0;
+}
+
+#a1_login{
+    float: right;
+    color: #2470EF;
+    font-weight: 600;
+}
+
+.a1_component:hover{
+    color: #2470EF;
+}
+/* ==================================== */
+.field{
+    background-color: #fff;
+    width: 320px;
+    height: 118px;
+    margin: 0 auto;
+}
+
+.input2, .input1 {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+}
+
+.input1 .input, 
+.input2  .input{
+    width: 273px;
+    height: 23px;
+    padding: 6px 12px 6px 35px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: #F4F5F6;
+}
+
+.input1 .input{
+    margin-bottom: 16px;
+}
+
+.eye-open {
+    position: absolute;
+    max-width: 20px;
+    max-height: 20px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.email, 
+.password{
+    position: absolute;
+    max-width: 20px;
+    max-height: 20px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.email{
+    top: 40%;
+}
+
+#fogot_pass{
+    float: right;
+    color: #333C44;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 16px 0;
+    background-color: #fff;
+}
+
+#button_login{
+    width: 304px;
+    height: 30px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background-color: #2490EF;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ==================================== */
+
+.b{
+    position: relative;
+    width: 1242px;
+    height: 520px;
+    padding: 24px 0;
+    margin: 16px auto;
+}
+
+.b1{
+    width: 400px;
+    height: 290px;
+    padding: 45px 0;
+    background-color: #fff;
+    text-align: center;
+    margin: 70px auto;
+    box-shadow: 0 1px 1px 0px gray;
+    border-radius: 5px;
+}
+
+.b1>img{
+    max-width: 42px;
+    max-height: 42px;
+    margin-bottom: 20px;
+}
+
+.b1 h4{
+    background-color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+}
+/* ==================================== */
+footer{
+    height: 109.9px;
+    padding: 80px 0;
+}
+
+.c{
+    padding: 0 24px;
+    height: 109.9px;
+    width: 1242px;
+    margin: 0 auto;
+}
+
+.footer_logo{
+    width: 100%;
+    height: 32.487px;
+}
+
+.footer_logo .c1_left{
+    width: 606px;
+    height: 100%;
+    padding: 0 16px;
+    float: left;
+}
+
+.footer_logo .c1_right{
+    width: 604px;
+    height: 100%;
+    float: left;
+}
+
+.footer_logo .c1_right button{
+    float: right;
+    width: 170px;
+    height: 32px;
+    padding: 4px 8px;
+    font-size: 13px;
+    border: 1.2px solid gray;
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.footer_logo .c1_right input{
+    float: right;
+    width: 274px;
+    height: 19px;
+    padding: 6px 12px;
+    border: 1.2px solid gray;
+}
+
+/* ========================= */
+
+.footer_row{
+    width: 100%;
+    height: 57px;
+    border-top: 1.2px solid gray;
+    margin-top: 10px;
+}
+
+.c2_left{
+    width: 50%;
+    line-height: 57px;
+    color: #74808B;
+    float: left;
+}
+
+.c2_right{
+    width: 50%;
+    float: left;
+    color: #74808B;
+}
+
+.c2_right a{
+    text-decoration: none;
+    float: right;
+    color: #74808B;
+    line-height: 57px;
+}
+
+.c2_right a:hover{
+    text-decoration: underline;
+}

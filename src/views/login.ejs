@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/login.js"></script>
+</head>
+
+<body>
+    <div class="all">
+        <header>
+            <div class="a">
+                <div class="a1">
+                    <a class="a1_component" id="a1_title" href="#">Công Ty M-offer</a>
+                    <a class="a1_component" href="#">Liên Lạc</a>
+                    <a class="a1_component" href="#">Blog</a>
+                    <a class="a1_component" href="#">Sản phẩm</a>
+                    <a class="a1_component" id="a1_login" href="home.html">Đăng nhập</a>
+                </div>
+            </div>
+        </header>
+        <div class="clear"></div>
+
+        <div class="b">
+            <div class="b1">
+                <img src="/image/logo.jpeg" alt="">
+                <h4>Đăng Nhập</h4>
+                <div class="field">
+                    <form>
+                        <div class="input1">
+                            <input id="email" type="email" placeholder="jane@example.com" class="input"
+                                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;">
+                            <i class="far fa-envelope email"></i>
+                        </div>
+
+                        <div class="input2">
+                            <input type="password" id="password-input" class="input"
+                                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;">
+                            <i class="far fa-eye eye-open" id="toggle-password"></i>
+                            <i class="fas fa-lock password"></i>
+                        </div>
+                        <!-- Quên mật khẩu -->
+                        <a href="#" id="fogot_pass">Quên mật khẩu?</a>
+                </div>
+
+                <button type="button" name="login" value="Đăng Nhập" id="button_login">Đăng Nhập</button>
+                </form>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <footer>
+            <div class="c">
+                <div class="footer_logo">
+                    <div class="c1_left"></div>
+                    <div class="c1_right">
+                        <form action="" method="post">
+                            <button type="submit">Nhận thông tin cập nhật</button>
+                            <input type="text" placeholder="Nhập địa chỉ email của bạn...">
+                        </form>
+                    </div>
+                </div>
+                <div class="footer_row">
+                    <div class="c2_left">© Công Ty M-offer</div>
+                    <div class="c2_right">
+                        <a href="#">Powered by ERPNext - ERP Software for Manufacturing Companies</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>const passwordInput = document.getElementById('password-input');
+        const togglePassword = document.getElementById('toggle-password');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle the icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });</script>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
