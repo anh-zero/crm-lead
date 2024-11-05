@@ -1,4 +1,6 @@
 # crm-lead
+Nhóm bọn em khá chú trọng đến việc design pattern và clean code nhưng trong quá trình làm sẽ có sai sót, mọi người có ý kiến hay chia sẻ gì
+hãy để lại ở phần ... để bọn em khắc phục và tiến bộ hơn ạ.
 How to run this project:
 
     1. Clone this project
