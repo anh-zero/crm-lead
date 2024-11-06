@@ -37,7 +37,7 @@ let initWebRoutes = (app) => {
         return res.render("add_Lead.ejs")
     });
     router.get("/crm", (req, res) => {
-        return res.render("homepage.ejs")
+        return res.render("crm.ejs")
     });
 
     return app.use("/", router);

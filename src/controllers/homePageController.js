@@ -21,9 +21,30 @@ let getEditPage = async (req, res) => {
     return res.render('update_Lead.ejs', { dataUser: user[0] }); // x <- y
 }
 let postUpdateLead = async (req, res) => {
-    let { name, organization, owner, status, code } = req.body;
-    await pool.execute('update leads set name = ?, organization = ? , owner = ? , status = ? where code = ?',
-        [name, organization, owner, status, code]);
+    let {
+        is_company, name, organization, email, owner, status, salutation,
+        position, gender, source, campaign, next_contact, next_at, end_at,
+        notes, address_type, address_name, street_address1, street_address2,
+        city, district, state_province, country, postal_code, forward,
+        mobile_phone, fax, website, lead_type, market_segment, industry,
+        request_type, company, nation, print_language, unsubscribe,
+        followed_blog, id
+    } = req.body;
+    is_company = is_company === 'on' ? 1 : 0;
+    unsubscribe = unsubscribe === 'on' ? 1 : 0;
+    followed_blog = followed_blog === 'on' ? 1 : 0;
+    await pool.execute(
+        'update leads set is_company = ?, name = ?, organization = ?, email = ?, owner = ?, status = ?, salutation = ?, position = ?, gender = ?,source = ?, campaign = ?, next_contact = ?, next_at = ?, end_at = ?,notes = ?, address_type = ?, address_name = ?, street_address1 = ?, street_address2 = ?, city = ?, district = ?, state_province = ?, country = ?, postal_code = ?, forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?, market_segment = ?, industry = ?,request_type = ?, company = ?, nation = ?, print_language = ?, unsubscribe = ?, followed_blog = ? where id = ?',
+        [
+            is_company, name, organization, email, owner, status, salutation,
+            position, gender, source, campaign, next_contact, next_at, end_at,
+            notes, address_type, address_name, street_address1, street_address2,
+            city, district, state_province, country, postal_code, forward,
+            mobile_phone, fax, website, lead_type, market_segment, industry,
+            request_type, company, nation, print_language, unsubscribe,
+            followed_blog, id
+        ]
+    );
     return res.redirect('/lead');
 }
 module.exports = {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/add_Lead.css">
-    <link href="./font/css/all.min.css" rel="stylesheet" />
+    <link href="/font/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -88,14 +88,16 @@
                 <!-- content__main -->
                 <div class="content__main">
                     <div class="content__row_first">
-                        <input type="checkbox" name="" id="">
+                        <input type="checkbox" name="is_company" id="">
                         <span>Khách hàng tiềm năng là một tổ chức</span>
                     </div>
                     <div class="content__row_two">
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Mã số</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="code" id="">
+                            <div class="row_two__select">
+                                <select name="" id="">
+                                    <option>CRM-LEAD-.YYYY.-</option>
+                                </select>
                             </div>
                             <div class="title__column_two"><label for="">Tên người *</label></div>
                             <div class="row_two__input">
@@ -107,14 +109,14 @@
                             </div>
                             <div class="title__column_two"><label for="">Địa chỉ email</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="email" id="">
+                                <input type="email" name="email" id="">
                             </div>
                         </div>
 
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Người sở hữu tiềm năng</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="owner" id="">
+                                <input type="email" name="owner" id="">
                             </div>
                             <div class="title__column_two"><label for="">Trạng thái *</label></div>
                             <div class="row_two__select">
@@ -124,31 +126,31 @@
                                     <option value="responded">Đã phản hồi</option>
                                     <option value="opportunity">Cơ hội</option>
                                     <option value="quote">Báo giá</option>
-                                    <option value="lost-quot">Mất Báo giá</option>
+                                    <option value="lost-quote">Mất Báo giá</option>
                                     <option value="care">Quan tâm</option>
-                                    <option value="">Chuyển đổi</option>
-                                    <option value="">Không liên hệ</option>
+                                    <option value="convert">Chuyển đổi</option>
+                                    <option value="no-contact">Không liên hệ</option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Xưng hô</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="salutation" id="">
                             </div>
-                            <div class="title__column_two"><label for="">Chức năng</label></div>
+                            <div class="title__column_two"><label for="">Chức vụ</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="position" id="">
                             </div>
                             <div class="title__column_two"><label for="">Giới tính</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="gender" id="">
                             </div>
                             <div class="title__column_two"><label for="">Nguồn</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="source" id="">
                             </div>
                             <div class="title__column_two"><label for="">Chiến dịch</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="campaign" id="">
                             </div>
                         </div>
 
@@ -161,18 +163,18 @@
                             <h4>Theo sát</h4>
                             <div class="title__column_two"><label for="">Liên hệ tiếp theo bằng</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="next_contact" id="">
                             </div>
                         </div>
 
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Ngày liên hệ tiếp theo</label></div>
                             <div class="row_two__input">
-                                <input type="date" name="" id="">
+                                <input type="date" name="next_at" id="" required>
                             </div>
                             <div class="title__column_two"><label for="">Kết thúc vào</label></div>
                             <div class="row_two__input">
-                                <input type="date" name="" id="">
+                                <input type="date" name="end_at" id="" required>
                             </div>
                         </div>
                     </div>
@@ -185,11 +187,10 @@
                                 <span class="toggle-icon">▼</span>
                             </h2>
                             <div class="section-content">
-                                <div id="editor">
-                                    <!-- Div chứa nội dung ghi chú đã chỉnh sửa bằng quill-->
-                                </div>
-                                <input type="hidden" name="notes" id="notes-input">
+                                <div id="editor"></div>
+                                <!-- Div chứa nội dung ghi chú đã chỉnh sửa bằng quill-->
                             </div>
+                            <input type="hidden" name="notes" id="notes-input">
                         </div>
                     </div>
 
@@ -197,56 +198,56 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Loại địa chỉ</label></div>
                             <div class="row_two__select">
-                                <select name="" id="">
-                                    <option value="#">Thanh toán</option>
-                                    <option value="#">vận chuyển</option>
-                                    <option value="#">Văn phòng</option>
-                                    <option value="#">Cá nhân</option>
-                                    <option value="#">Nhà máy</option>
-                                    <option value="#">Bưu chính</option>
-                                    <option value="#">Cửa hàng</option>
-                                    <option value="#">Chuyển đổi</option>
-                                    <option value="#">Công ty con</option>
-                                    <option value="#">Kho hàng</option>
-                                    <option value="#">Hiện tại</option>
-                                    <option value="#">Dài hạn</option>
-                                    <option value="#">Khác</option>
+                                <select name="address_type" id="">
+                                    <option default value="payment">Thanh toán</option>
+                                    <option value="shipping">vận chuyển</option>
+                                    <option value="office">Văn phòng</option>
+                                    <option value="personal">Cá nhân</option>
+                                    <option value="factory">Nhà máy</option>
+                                    <option value="postal">Bưu chính</option>
+                                    <option value="store">Cửa hàng</option>
+                                    <option value="convert">Chuyển đổi</option>
+                                    <option value="subsidiary">Công ty con</option>
+                                    <option value="warehouse">Kho hàng</option>
+                                    <option value="current">Hiện tại</option>
+                                    <option value="longterm">Dài hạn</option>
+                                    <option value="other">Khác</option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Tên địa chỉ</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="address_name" id="">
                             </div>
                             <div class="title__column_two"><label for="">Địa chỉ line 1</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="street_address1" id="">
                             </div>
                             <div class="title__column_two"><label for="">Địa chỉ line 2</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="street_address2" id="">
                             </div>
                             <div class="title__column_two"><label for="">Thành phố / thị xã</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="city" id="">
                             </div>
                             <div class="title__column_two"><label for="">Quận</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="district" id="">
                             </div>
                         </div>
 
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Tiểu bang</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="state_province" id="">
                             </div>
                             <div class="title__column_two"><label for="">Quốc gia</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="" value="việt nam">
+                                <input type="text" name="country" id="" value="việt nam">
                             </div>
                             <div class="title__column_two"><label for="">mã bưu chính</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="" value="">
+                                <input type="text" name="postal_code" id="" value="">
                             </div>
                         </div>
                     </div>
@@ -255,19 +256,19 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Chuyển tiếp</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="forward" id="">
                             </div>
                             <div class="title__column_two"><label for="">Số điện thoại di động</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="mobile_phone" id="">
                             </div>
                             <div class="title__column_two"><label for="">Fax</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="fax" id="">
                             </div>
                             <div class="title__column_two"><label for="">Website</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="website" id="">
                             </div>
                         </div>
 
@@ -280,29 +281,29 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Loại tiềm năng</label></div>
                             <div class="row_two__select">
-                                <select name="" id="">
-                                    <option value=""></option>
-                                    <option value="one">Khách hàng</option>
-                                    <option value="one">Đối tác</option>
-                                    <option value="one">Tư vấn</option>
+                                <select name="lead_type" id="">
+                                    <option default value="undefined"></option>
+                                    <option value="customer">Khách hàng</option>
+                                    <option value="partner">Đối tác</option>
+                                    <option value="adviser">Tư vấn</option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Phân khúc thị trường</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="market_segment" id="">
                             </div>
                             <div class="title__column_two"><label for="">Ngành công nghiệp</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="">
+                                <input type="text" name="industry" id="">
                             </div>
                             <div class="title__column_two"><label for="">Yêu cầu loại</label></div>
                             <div class="row_two__select">
-                                <select name="" id="">
-                                    <option value=""></option>
-                                    <option value="#">Đặt hàng sản phẩm</option>
-                                    <option value="#">Yêu cầu thông tin</option>
-                                    <option value="#">Đề xuất</option>
-                                    <option value="#">Khác</option>
+                                <select name="request_type" id="">
+                                    <option default value="undefined"></option>
+                                    <option value="order">Đặt hàng sản phẩm</option>
+                                    <option value="information_request">Yêu cầu thông tin</option>
+                                    <option value="propose">Đề xuất</option>
+                                    <option value="other">Khác</option>
                                 </select>
                             </div>
                         </div>
@@ -310,27 +311,28 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Công ty</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="" value="M-offer">
+                                <input type="text" name="company" id="" value="M-offer">
                             </div>
                             <div class="title__column_two"><label for="">Quốc gia</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="" value="việt nam">
+                                <input type="text" name="nation" id="" value="việt nam">
                             </div>
                             <div class="title__column_two"><label for="">Ngôn ngữ in</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="" id="" value="in">
+                                <input type="text" name="print_language" id="" value="in">
                             </div>
                             <div class="row_two__checkbox">
-                                <input type="checkbox" name="" id="" value="in">
+                                <input type="checkbox" name="unsubscribe" id="">
                                 <label for="">Hủy đăng ký</label>
                             </div>
                             <div class="row_two__checkbox">
-                                <input type="checkbox" name="" id="" value="in">
+                                <input type="checkbox" name="followed_blog" id="">
                                 <label for="">Người theo dõi blog</label>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 

@@ -44,7 +44,27 @@
                         <li class="header__second-item">|</i></li>
                         <li class="header__second-item help"><a href="#">Trợ Giúp <i
                                     class="fas fa-chevron-down"></i></a></li>
-                        <li class="header__second-item"><i class="fas fa-user-circle"></i></li>
+                        <li class="header__second-item">
+                            <%= user.fullname %>
+                                <label for="logout" class="fas fa-user-circle"></label>
+                                <input type="checkbox" name="" class="ohyes" id="logout" hidden>
+                                <label for="logout" class="overlay1"></label>
+                                <ul class="logout">
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li>
+                                        <form method="POST" action="/logout">
+                                            <button type="submit" class="btn btn-primary zerobtn">Log out</button>
+                                        </form>
+                                    <li></li>
+                                </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -72,8 +92,7 @@
                     <div class="sidebar__mobile">
                         <div class="sidebar__title">BỘ PHẬN</div>
                         <div class="sidebar__list">
-                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang
-                                chủ</a>
+                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
                             <a class="sidebar__list-item" href="#">Kế toán</a>
                             <a class="sidebar__list-item" href="#">Tài Sản</a>
                             <a class="sidebar__list-item" href="#">Build</a>
@@ -119,7 +138,7 @@
             <div class="sidebar__PC">
                 <div class="sidebar__title">BỘ PHẬN</div>
                 <div class="sidebar__list">
-                    <a clclass="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
+                    <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
                     <a class="sidebar__list-item" href="#">Kế toán</a>
                     <a class="sidebar__list-item" href="#">Tài Sản</a>
                     <a class="sidebar__list-item" href="#">Build</a>
@@ -147,7 +166,7 @@
             </div>
 
             <!-- content__main -->
-            <div class="content__main" style="background-color: red;">
+            <div class="content__main">
                 <div class="content__main-title">Lối Tắt</div>
                 <div class="content__main-list-shortcut">
                     <div class="content__main-item-shortcut one"><span>Sản phẩm</span></div>
@@ -187,8 +206,7 @@
                     <div class="content__main-item-report">
                         <i class="far fa-list-alt"></i>
                         <span class="c2_4-title">CRM</span>
-                        <a href="/lead"><span class="content__main-item-true">&#8226;</span> Khách hàng tiềm
-                            năng</a>
+                        <a href="/lead"><span class="content__main-item-true">&#8226;</span> Khách hàng tiềm năng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhóm khách hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Quốc gia</a>
                     </div>
