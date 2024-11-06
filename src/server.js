@@ -8,6 +8,7 @@ import session from "express-session";
 import passport from "passport";
 
 let app = express();
+let port = process.env.PORT || 8080;
 
 app.use(cookieParser("secret"));
 
@@ -22,7 +23,11 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // config view engine
 viewEngine(app);
@@ -34,8 +39,11 @@ app.use(passport.session());
 //init all web routes
 initWebRoutes(app);
 
-let port = process.env.PORT || 8080;
+//handle 404 not found
+app.use((req, res) => {
+   return res.render('404.ejs')
+})
 
-app.listen(port, ()=>{
-   console.log(`App is running at the ${port}`);
+app.listen(port, () => {
+   console.log(`App is running at the ${port}.`);
 });

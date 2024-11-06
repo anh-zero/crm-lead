@@ -1,28 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Home Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home.css">
+    <link href="/font/css/all.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" /> -->
+    <title>Trang Chủ</title>
+    <link rel="icon" href="/image/logo.jpeg">
 </head>
+
 <body>
-<div class="container">
-    <div class="container">
-       <div>
-           <h1>Hello world!</h1>
-           <h2>Welcom: <%= user.fullname %></h2>
-           <div>
-               <form method="POST" action="/logout">
-                   <button type="submit" class="btn btn-primary">Log out</button>
-               </form>
-           </div>
-       </div>
+    <!-- all -->
+    <div class="main">
+        <!-- header -->
+        <header>
+            <!-- header__main -->
+            <div class="header__main">
+                <!-- header__first -->
+                <div class="header__first">
+                    <div class="header__first-logo">
+                        <a class="header__first-logo-link" href="./home.html">
+                            <img src="/image/logo.jpeg" alt="">
+                        </a>
+                    </div>
+                    <!-- header__first-input -->
+                    <div class="header__first-input">
+                        <form class="header__first-form" action="">
+                            <input class="header__first-form-input" type="text" name=""
+                                placeholder="Tìm Kiếm Hoặc Gõ Lệnh (Ctrl + G)">
+                            <button class="header__first-form-btn" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- header__second -->
+                <div class="header__second">
+                    <ul class="header__second-list">
+                        <li class="header__second-item"><i class="fa-regular fa-bell"></i></li>
+                        <li class="header__second-item">|</i></li>
+                        <li class="header__second-item help"><a href="#">Trợ Giúp <i
+                                    class="fas fa-chevron-down"></i></a></li>
+                        <li class="header__second-item"><i class="fas fa-user-circle"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- nav -->
+        <nav>
+            <div class="nav__main">
+                <!-- nav__first -->
+                <div class="nav__first">
+                    <ul class="nav__first-list-PC">
+                        <li class="nav__first-item"><i class="fa-solid fa-bars toggle_menu"></i></li>
+                        <li class="nav__first-item">
+                            <span class="nav__first-item-span">Trang Chủ</span>
+                        </li>
+                    </ul>
+                    <ul class="nav__first-list-MOBILE">
+                        <li class="nav__first-item"><label for="nav-mobile-input" class="fa-solid fa-bars"></label></li>
+                        <li class="nav__first-item">
+                            <span class="nav__first-item-span">Trang Chủ</span>
+                        </li>
+                    </ul>
+                    <input type="checkbox" name="" class="ohno" id="nav-mobile-input" hidden>
+                    <label for="nav-mobile-input" class="overlay"></label>
+                    <div class="sidebar__mobile">
+                        <div class="sidebar__title">BỘ PHẬN</div>
+                        <div class="sidebar__list">
+                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang
+                                chủ</a>
+                            <a class="sidebar__list-item" href="#">Kế toán</a>
+                            <a class="sidebar__list-item" href="#">Tài Sản</a>
+                            <a class="sidebar__list-item" href="#">Build</a>
+                            <a class="sidebar__list-item" href="#">Mua hàng</a>
+                            <a class="sidebar__list-item" href="/crm">CRM</a>
+                            <a class="sidebar__list-item" href="#">Nhân Sự</a>
+                            <a class="sidebar__list-item" href="#">Khoản Vay</a>
+                            <a class="sidebar__list-item" href="#">Bảng Lương</a>
+                            <a class="sidebar__list-item" href="#">Dự án</a>
+                            <a class="sidebar__list-item" href="#">Chất lượng</a>
+                            <a class="sidebar__list-item" href="#">Bán hàng</a>
+                            <a class="sidebar__list-item" href="#">Kho</a>
+                            <a class="sidebar__list-item" href="#">Hỗ trợ</a>
+                            <a class="sidebar__list-item" href="#">Website</a>
+                            <a class="sidebar__list-item" href="#">Cài Đặt</a>
+                            <a class="sidebar__list-item" href="#">Tiện Ích</a>
+                        </div>
+                        <div class="sidebar__title">TÊN MIỀN</div>
+                        <a class="sidebar__list-item" href="#">Sản xuất</a>
+                        <div class="sidebar__title">QUẢN TRỊ</div>
+                        <a class="sidebar__list-item" href="#">Tùy biến</a>
+                        <a class="sidebar__list-item" href="#">Tích hợp</a>
+                        <a class="sidebar__list-item" href="#">Công cụ</a>
+                        <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                    </div>
+                </div>
+
+                <!-- nav__second -->
+                <div class="nav__second">
+                    <form class="nav__second-form-first" action="">
+                        <button class="nav__second-btn-first" type="submit">Tùy Chỉnh</button>
+                    </form>
+                    <form class="nav__second-form-second" action="">
+                        <button class="nav__second-btn-second" type="submit">...</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- content -->
+        <div class="content">
+            <!-- sidebar -->
+            <div class="sidebar__PC">
+                <div class="sidebar__title">BỘ PHẬN</div>
+                <div class="sidebar__list">
+                    <a clclass="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
+                    <a class="sidebar__list-item" href="#">Kế toán</a>
+                    <a class="sidebar__list-item" href="#">Tài Sản</a>
+                    <a class="sidebar__list-item" href="#">Build</a>
+                    <a class="sidebar__list-item" href="#">Mua hàng</a>
+                    <a class="sidebar__list-item" href="/crm">CRM</a>
+                    <a class="sidebar__list-item" href="#">Nhân Sự</a>
+                    <a class="sidebar__list-item" href="#">Khoản Vay</a>
+                    <a class="sidebar__list-item" href="#">Bảng Lương</a>
+                    <a class="sidebar__list-item" href="#">Dự án</a>
+                    <a class="sidebar__list-item" href="#">Chất lượng</a>
+                    <a class="sidebar__list-item" href="#">Bán hàng</a>
+                    <a class="sidebar__list-item" href="#">Kho</a>
+                    <a class="sidebar__list-item" href="#">Hỗ trợ</a>
+                    <a class="sidebar__list-item" href="#">Website</a>
+                    <a class="sidebar__list-item" href="#">Cài Đặt</a>
+                    <a class="sidebar__list-item" href="#">Tiện Ích</a>
+                </div>
+                <div class="sidebar__title">TÊN MIỀN</div>
+                <a class="sidebar__list-item" href="#">Sản xuất</a>
+                <div class="sidebar__title">QUẢN TRỊ</div>
+                <a class="sidebar__list-item" href="#">Tùy biến</a>
+                <a class="sidebar__list-item" href="#">Tích hợp</a>
+                <a class="sidebar__list-item" href="#">Công cụ</a>
+                <a class="sidebar__list-item" href="#">Người sử dụng</a>
+            </div>
+
+            <!-- content__main -->
+            <div class="content__main" style="background-color: red;">
+                <div class="content__main-title">Lối Tắt</div>
+                <div class="content__main-list-shortcut">
+                    <div class="content__main-item-shortcut one"><span>Sản phẩm</span></div>
+                    <div class="content__main-item-shortcut two"><span>Danh Sách Khách Hàng</span></div>
+                    <div class="content__main-item-shortcut three"><span>Nhà Cung Cấp</span></div>
+                    <div class="content__main-item-shortcut four"><span>Hóa đơn bán hàng</span></div>
+                    <div class="content__main-item-shortcut five"><span>Bảng thành Tích</span></div>
+                </div>
+
+
+                <div class="content__main-title">Báo Cáo & Tính năng chính</div>
+                <div class="content__main-list-report">
+                    <div class="content__main-item-report">
+                        <i class="far fa-list-alt"></i>
+                        <span class="c2_4-title">Kế toán</span>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Biểu đồ tài khoản</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Công Ty</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Danh Sách Khách Hàng</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Nhà Cung Cấp</a>
+                    </div>
+                    <div class="content__main-item-report">
+                        <i class="far fa-list-alt"></i>
+                        <span class="c2_4-title">Kho</span>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Sản phẩm</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Kho hàng</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Nhãn</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Unit of Measure (UOM)</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Kiểm kê, chốt kho</a>
+                    </div>
+                    <div class="content__main-item-report">
+                        <i class="far fa-list-alt"></i>
+                        <span class="c2_4-title">Nhân sự</span>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Nhân Viên</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Công Cụ Chấm Công Nhân Viên</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Cơ cấu tiền lương</a>
+                    </div>
+                    <div class="content__main-item-report">
+                        <i class="far fa-list-alt"></i>
+                        <span class="c2_4-title">CRM</span>
+                        <a href="/lead"><span class="content__main-item-true">&#8226;</span> Khách hàng tiềm
+                            năng</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Nhóm khách hàng</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Quốc gia</a>
+                    </div>
+                    <div class="content__main-item-report">
+                        <i class="far fa-list-alt"></i>
+                        <span class="c2_4-title">Nhập và Cài đặt dữ liệu</span>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Nhập dữ liệu</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Mở công cụ tạo hóa đơn</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Biểu đồ của nhà nhập tài
+                            khoản</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Tiêu Đề Thư</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Tài khoản email</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <script>
+        const sidebar = document.querySelector('.sidebar__PC');
+        const toggle_menu = document.querySelector('.toggle_menu');
+        const content = document.querySelector('.content__main');
+        const content6 = document.querySelector('.content__main-list-shortcut');
+        const content1 = document.querySelector('.one');
+        const content2 = document.querySelector('.two');
+        const content3 = document.querySelector('.three');
+        const content4 = document.querySelector('.four');
+        const content5 = document.querySelector('.five');
+
+
+        toggle_menu.onclick = function () {
+            sidebar.classList.toggle('hide');
+            content.classList.toggle('expand');
+            content1.classList.toggle('expand');
+            content2.classList.toggle('expand');
+            content3.classList.toggle('expand');
+            content4.classList.toggle('expand');
+            content5.classList.toggle('expand');
+            content6.classList.toggle('expand');
+        }
+    </script>
 </body>
+
 </html>

@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-    <title>Login</title>
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" /> -->
+    <link href="/font/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="icon" href="/image/logo.jpeg">
+    <title>Login</title>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/login.js"></script>
@@ -14,60 +16,77 @@
 
 <body>
     <div class="all">
+        <!-- header -->
         <header>
-            <div class="a">
-                <div class="a1">
-                    <a class="a1_component" id="a1_title" href="#">Công Ty M-offer</a>
-                    <a class="a1_component" href="#">Liên Lạc</a>
-                    <a class="a1_component" href="#">Blog</a>
-                    <a class="a1_component" href="#">Sản phẩm</a>
-                    <a class="a1_component" id="a1_login" href="home.html">Đăng nhập</a>
+            <div class="header__main">
+                <a class="header__link" href="#">Công Ty M-offer</a>
+                <button class="btn__mobile"><i class="fa-solid fa-bars toggle_menu" hidden></i></button>
+                <div class="header__list">
+                    <ul class="list__right">
+                        <li class="item__right"><a href="#">Liên lạc</a></li>
+                        <li class="item__right"><a href="#">Bloc</a></li>
+                        <li class="item__right"><a href="#">Sản phẩm</a></li>
+                    </ul>
+                    <ul class="list__left">
+                        <li class="item__left"><a href="home.html">Đăng nhập</a></li>
+                    </ul>
                 </div>
             </div>
         </header>
-        <div class="clear"></div>
 
-        <div class="b">
-            <div class="b1">
-                <img src="/image/logo.jpeg" alt="">
-                <h4>Đăng Nhập</h4>
-                <div class="field">
-                    <form>
-                        <div class="input1">
-                            <input id="email" type="email" placeholder="jane@example.com" class="input"
+        <!-- content -->
+        <div class="content">
+            <div class="content__login">
+                <div class="content__header">
+                    <img src="/image/logo.jpeg" alt="">
+                    <h4>Đăng Nhập</h4>
+                </div>
+
+                <form class="content__form" action="" method="post">
+                    <div class="content__main">
+                        <div class="form__group">
+                            <!-- THEM ID -->
+                            <input id="email" class="input__email" type="text" placeholder="jane@example.com"
                                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;">
                             <i class="far fa-envelope email"></i>
                         </div>
 
-                        <div class="input2">
-                            <input type="password" id="password-input" class="input"
+                        <div class="form__group">
+                            <input id="password-input" class="input__password" type="password"
                                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;">
                             <i class="far fa-eye eye-open" id="toggle-password"></i>
                             <i class="fas fa-lock password"></i>
                         </div>
+
                         <!-- Quên mật khẩu -->
                         <a href="#" id="fogot_pass">Quên mật khẩu?</a>
-                </div>
-
-                <button type="button" name="login" value="Đăng Nhập" id="button_login">Đăng Nhập</button>
+                    </div>
+                    <div class="content__action">
+                        <!-- THEM ID -->
+                        <!-- THAY TYPE THANH BUTTON -->
+                        <button id="button_login" class=" action__login" type="button" name="login"
+                            value="Đăng Nhập">Đăng Nhập</button>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="clear"></div>
+
+        <!-- footer -->
         <footer>
-            <div class="c">
-                <div class="footer_logo">
-                    <div class="c1_left"></div>
-                    <div class="c1_right">
-                        <form action="" method="post">
-                            <button type="submit">Nhận thông tin cập nhật</button>
-                            <input type="text" placeholder="Nhập địa chỉ email của bạn...">
+            <div class="footer__main">
+                <div class="footer__logo">
+                    <div class="footer__logo_left"></div>
+                    <div class="footer__logo_right">
+                        <form class="form__right" action="" method="post"">
+                            <input class=" footer__logo_right_input" type="text"
+                            placeholder="Nhập địa chỉ email của bạn...">
+                            <button class="footer__logo_right_button" type="submit">Nhận thông tin cập nhật</button>
                         </form>
                     </div>
                 </div>
                 <div class="footer_row">
-                    <div class="c2_left">© Công Ty M-offer</div>
-                    <div class="c2_right">
+                    <div class="row_left">© Công Ty M-offer</div>
+                    <div class="row_right">
                         <a href="#">Powered by ERPNext - ERP Software for Manufacturing Companies</a>
                     </div>
                 </div>
@@ -75,20 +94,7 @@
         </footer>
     </div>
 
-    <script>const passwordInput = document.getElementById('password-input');
-        const togglePassword = document.getElementById('toggle-password');
-
-        togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-
-            // Toggle the icon
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });</script>
-
-    <script src="./main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
