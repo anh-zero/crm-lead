@@ -45,25 +45,27 @@
                         <li class="header__second-item help"><a href="#">Trợ Giúp <i
                                     class="fas fa-chevron-down"></i></a></li>
                         <li class="header__second-item">
-                            <%= user.fullname %>
-                                <label for="logout" class="fas fa-user-circle"></label>
-                                <input type="checkbox" name="" class="ohyes" id="logout" hidden>
-                                <label for="logout" class="overlay1"></label>
-                                <ul class="logout">
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
-                                    <li>
-                                        <form method="POST" action="/logout">
-                                            <button type="submit" class="btn btn-primary zerobtn">Log out</button>
-                                        </form>
-                                    <li></li>
-                                </ul>
+
+                            <label for="logout" class="fas">
+                                <%= user.fullname %>
+                            </label>
+                            <input type="checkbox" name="" class="ohyes" id="logout" hidden>
+                            <label for="logout" class="overlay1"></label>
+                            <ul class="logout">
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li><a href="#">Demo</a></li>
+                                <li>
+                                    <form method="POST" action="/logout">
+                                        <button type="submit" class="btn btn-primary zerobtn">Log out</button>
+                                    </form>
+                                <li></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

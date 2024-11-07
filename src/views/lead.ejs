@@ -111,20 +111,15 @@
                         <input class="taochiu" type="checkbox" name="" id="vcl" hidden>
                         <button class="add-KHTN" type="submit"><a href="/add-lead">+ Thêm Khách hàng tiềm
                                 năng</a></button>
-                        <div class="action__insert_delete"><label for="action">Hành động <i
-                                    class="fa-solid fa-chevron-down"></i></label>
-                            <input type="checkbox" name="" class="ohno_b_yes" id="action" hidden>
+                        <div class="action__insert_delete">
+                            <label for="action">Hành động <i class="fa-solid fa-chevron-down"></i></label>
+                            <input type="checkbox" class="ohno_b_yes" id="action" hidden>
                             <label for="action" class="overlay2"></label>
                             <ul class="action">
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="./update_Lead.html">Sửa</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Xóa</a></li>
+                                <!-- Other actions if any -->
+                                <li><button type="button" onclick="editSelectedLead()">Sửa</button></li>
+                                <li><button type="button" onclick="deleteSelectedLeads()">Xóa</button></li>
+                                <!-- Other actions if any -->
                             </ul>
                         </div>
 
@@ -203,13 +198,13 @@
                                     <th>Người sở hữu tiềm năng</th>
                                     <th>Trạng thái</th>
                                     <th>Tên</th>
-                                    <th>Date/Time</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <% for(let i=0; i < dataUser.length; i++) { %>
+                            <% for(let i=0; i < dataUser.length; i++) { %>
+                                <tbody>
                                     <tr class="even_col">
-                                        <td><input class="abcd" type="checkbox" name="row-check" value="2"></td>
+                                        <td><input class="abcd" type="checkbox" name="row-check"
+                                                value="<%= dataUser[i].id %>"></td>
                                         <td>
                                             <%=dataUser[i].name %>
                                         </td>
@@ -244,18 +239,9 @@
                                         <td>
                                             <%=dataUser[i].code %>
                                         </td>
-                                        <td style="display: flex; gap: 15px;">
-                                            <form action="/edit-lead/<%= dataUser[i].id %>" method="GET">
-                                                <button type="submit">Edit</button>
-                                            </form>
-                                            <form action="/delete-lead" method="POST">
-                                                <input type="text" hidden value="<%= dataUser[i].id %>" name="userId" />
-                                                <button type="submit">Delete</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                     <% } %>
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -265,6 +251,65 @@
 
     <!-- script -->
     <script>
+        function getSelectedLeadId() {
+            const checkboxes = document.querySelectorAll('input[name="row-check"]:checked');
+            if (checkboxes.length === 1) {
+                return checkboxes[0].value;
+            } else if (checkboxes.length === 0) {
+                alert('Vui lòng chọn một khách hàng để thực hiện hành động.');
+                return null;
+            } else {
+                alert('Chỉ chọn một khách hàng tại một thời điểm.');
+                return null;
+            }
+        }
+
+        function getSelectedLeadIds() {
+            const checkboxes = document.querySelectorAll('input[name="row-check"]:checked');
+            const ids = Array.from(checkboxes).map(cb => cb.value);
+            if (ids.length === 0) {
+                alert('Vui lòng chọn ít nhất một khách hàng để thực hiện hành động.');
+                return null;
+            }
+            return ids;
+        }
+
+        function editSelectedLead() {
+            const leadId = getSelectedLeadId();
+            if (leadId) {
+                window.location.href = '/edit-lead/' + leadId;
+            }
+        }
+
+        function deleteSelectedLeads() {
+            const ids = getSelectedLeadIds();
+            if (ids) {
+                if (confirm('Bạn có chắc muốn xóa các khách hàng đã chọn?')) {
+                    // Send a POST request to delete the selected leads
+                    fetch('/delete-leads', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            // Include CSRF token if needed
+                        },
+                        body: JSON.stringify({ ids: ids })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Optionally, refresh the page or remove deleted rows from the UI
+                                location.reload();
+                            } else {
+                                alert('Đã xảy ra lỗi khi xóa khách hàng.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Đã xảy ra lỗi khi xóa khách hàng.');
+                        });
+                }
+            }
+        }
+
         $(function () {
             // Khi checkbox "#check_all" được click
             $("#check_all").on("click", function () {

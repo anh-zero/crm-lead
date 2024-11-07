@@ -170,11 +170,11 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Ngày liên hệ tiếp theo</label></div>
                             <div class="row_two__input">
-                                <input type="date" name="next_at" id="" required value="<%= dataUser.next_at%>">
+                                <input type="date" name="next_at" id="" value="<%= dataUser.next_at%>">
                             </div>
                             <div class="title__column_two"><label for="">Kết thúc vào</label></div>
                             <div class="row_two__input">
-                                <input type="date" name="end_at" id="" required value="<%= dataUser.end_at%>">
+                                <input type="date" name="end_at" id="" value="<%= dataUser.end_at%>">
                             </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                                 <div id="editor"></div>
                                 <!-- Div chứa nội dung ghi chú đã chỉnh sửa bằng quill-->
                             </div>
-                            <input type="hidden" name="notes" id="notes-input">
+                            <input type="hidden" name="notes" id="notes-input" value="<%= dataUser.notes%>">
                         </div>
                     </div>
 

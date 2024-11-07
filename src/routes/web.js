@@ -25,10 +25,12 @@ let initWebRoutes = (app) => {
     //show all leads
     router.get('/lead', homePageController.showLeads)
     //delete lead
-    router.post('/delete-lead', homePageController.deleteLead);
+    router.get('/delete-lead/:userId', homePageController.deleteLead);
     //update lead
     router.get('/edit-lead/:id', homePageController.getEditPage);
     router.post('/update-lead', homePageController.postUpdateLead);
+    // Bulk Delete Leads
+    router.post('/delete-leads', homePageController.bulkDeleteLeads);
     //test interface
     router.get("/home", (req, res) => {
         return res.render("home.ejs")
