@@ -48,7 +48,7 @@ let postUpdateLead = async (req, res) => {
     unsubscribe = unsubscribe === 'on' ? 1 : 0;
     followed_blog = followed_blog === 'on' ? 1 : 0;
     await pool.execute(
-        'update leads set is_company = ?, name = ?, organization = ?, email = ?, owner = ?, status = ?, salutation = ?, position = ?, gender = ?,source = ?, campaign = ?, next_contact = ?, next_at = ?, end_at = ?,notes = ?, address_type = ?, address_name = ?, street_address1 = ?, street_address2 = ?, city = ?, district, state_province = ?, country = ?, postal_code = ?, forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?, market_segment = ?, industry = ?,request_type = ?, company = ?, nation = ?, print_language = ?, unsubscribe = ?, followed_blog = ? where id = ?',
+        'update leads set is_company = ?, name = ?, organization = ?, email = ?, owner = ?, status = ?, salutation = ?, position = ?, gender = ?,source = ?, campaign = ?, next_contact = ?, next_at = ?, end_at = ?,notes = ?, address_type = ?, address_name = ?, street_address1 = ?, street_address2 = ?, city = ?, district=?, state_province = ?, country = ?, postal_code = ?, forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?, market_segment = ?, industry = ?,request_type = ?, company = ?, nation = ?, print_language = ?, unsubscribe = ?, followed_blog = ? where id = ?',
         [
             is_company, name, organization, email, owner, status, salutation,
             position, gender, source, campaign, next_contact, next_at, end_at,
@@ -59,7 +59,9 @@ let postUpdateLead = async (req, res) => {
             followed_blog, id
         ]
     );
-    return res.redirect('/lead');
+    // Instead of redirecting to /lead
+    // Redirect back to the same edit page
+    return res.redirect(`/edit-lead/${req.body.id}`);
 }
 let bulkDeleteLeads = async (req, res) => {
     const ids = req.body.ids; // This should be an array of IDs

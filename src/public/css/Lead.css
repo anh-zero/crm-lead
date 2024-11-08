@@ -645,3 +645,23 @@ nav{
 .content-all{
     width:100%;
 }
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between items */
+}
+
+.breadcrumb-item {
+    text-decoration: none;
+    color: #007bff; /* Change color as desired */
+}
+
+.breadcrumb-item.active {
+    color: #007bff; /* Color for active item */
+}
+
+.breadcrumb-item:not(.active)::after {
+    content: ">";
+    margin-left: 8px;
+}
+

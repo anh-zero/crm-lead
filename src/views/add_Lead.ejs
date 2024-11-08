@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/add_Lead.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Add CKEditor script -->
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Thêm khách hàng tiềm năng</title>
 </head>
@@ -24,6 +24,29 @@
                         <a class="header__first-logo-link" href="./home.html">
                             <img src="./img/logo.png" alt="">
                         </a>
+                    </div>
+                    <div class="breadcrumb">
+                        <a href="#" class="breadcrumb-item">CRM</a>
+                        <a href="#" class="breadcrumb-item">Khách hàng tiềm năng</a>
+                        <input type="hidden" id="accessCount" name="accessCount">
+                        <span class="breadcrumb-item active">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    // Get current count from session storage
+                                    let visitCount = parseInt(sessionStorage.getItem('addLeadVisitCount') || 0);
+                                    visitCount++; // Increment count
+
+                                    // Store updated count
+                                    sessionStorage.setItem('addLeadVisitCount', visitCount);
+
+                                    // Update hidden input and breadcrumb
+                                    document.getElementById('accessCount').value = visitCount;
+                                    document.querySelector('.breadcrumb-item.active').textContent =
+                                        `new-lead ${visitCount}`;
+                                });
+                            </script>
+                            new-lead
+                        </span>
                     </div>
                     <!-- header__first-input -->
                     <div class="header__first-input">
@@ -182,15 +205,14 @@
                     <div class="content__row_two">
                         <!-- Form 3 Ghi chú -->
                         <div class="collapsible-section">
-                            <h2 class="section-title active">
+                            <h2 class="section-title">
                                 Ghi Chú
                                 <span class="toggle-icon">▼</span>
                             </h2>
                             <div class="section-content">
-                                <div id="editor"></div>
+                                <textarea name="notes" id="editor"></textarea>
                                 <!-- Div chứa nội dung ghi chú đã chỉnh sửa bằng quill-->
                             </div>
-                            <input type="hidden" name="notes" id="notes-input">
                         </div>
                     </div>
 
@@ -337,25 +359,13 @@
     </div>
 
     <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow',
-            modules: {
-                toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    ['link', 'image', 'video'],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                    [{ 'align': [] }],
-                    ['clean']
-                ]
-            }
-        });
 
-        // Khi form được gửi, cập nhật input ẩn với nội dung của editor
-        document.querySelector('form').onsubmit = function () {
-            document.getElementById('notes-input').value = quill.root.innerHTML;
+
+        CKEDITOR.replace('editor');
+
+        CKEDITOR.editorConfig = function (config) {
+            config.versionCheck = false;
         };
-
         // Cập nhật chức năng collapsible
         document.querySelectorAll('.section-title').forEach(function (title) {
             title.addEventListener('click', function () {
@@ -369,9 +379,17 @@
             });
         });
 
-        // Khởi tạo tất cả các phần tử section là mở
-        document.querySelectorAll('.section-content').forEach(function (content) {
-            content.style.maxHeight = content.scrollHeight + "px";
+        // Add this to your existing script section
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize all section-content elements as collapsed
+            document.querySelectorAll('.section-content').forEach(function (content) {
+                content.style.maxHeight = null;
+            });
+
+            // Update toggle icons to show collapsed state
+            document.querySelectorAll('.toggle-icon').forEach(function (icon) {
+                icon.textContent = '▲';
+            });
         });
 
         const sidebar = document.querySelector('.c1_KHTN');

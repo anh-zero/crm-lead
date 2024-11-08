@@ -21,14 +21,18 @@ let createNewLead = async (req, res) => {
     // Construct the lead code
     const code = `CRM-LEAD-${currentYear}-${sequenceNumber}`;
 
-    // Insert the new lead into the database
-    await pool.execute(
+    // Insert the new lead into the database and get the result
+    const [result] = await pool.execute(
         'INSERT INTO leads(code, is_company, name, organization, email, owner, status, salutation, position, gender, source, campaign, next_contact, next_at, end_at, notes,address_type, address_name, street_address1, street_address2, city, district, state_province, country, postal_code, forward, mobile_phone, fax, website,lead_type, market_segment, industry, request_type, company, nation, print_language, unsubscribe, followed_blog) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)',
         [code, is_company, name, organization, email, owner, status, salutation, position, gender, source, campaign, next_contact, next_at, end_at, notes, address_type, address_name, street_address1, street_address2, city, district,
             state_province, country, postal_code, forward, mobile_phone, fax, website, lead_type, market_segment, industry, request_type, company, nation, print_language, unsubscribe, followed_blog]
     );
 
-    return res.redirect('/lead');
+    // Get the ID of the newly inserted lead
+    const newLeadId = result.insertId;
+
+    // Redirect to the edit page of the new lead
+    return res.redirect(`/edit-lead/${newLeadId}`);
 };
 
 
