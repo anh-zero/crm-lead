@@ -1,4 +1,4 @@
-
+//submit the login
 function handleLoginBtn() {
     $("#button_login").on("click", function (event) {
         event.preventDefault();
@@ -20,4 +20,17 @@ function handleLoginBtn() {
 }
 $(document).ready(function () {
     handleLoginBtn();
+});
+//toogle password or note
+const passwordInput = document.getElementById('password-input');
+const togglePassword = document.getElementById('toggle-password');
+
+togglePassword.addEventListener('click', function () {
+    // Toggle the type attribute
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Toggle the icon
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
 });

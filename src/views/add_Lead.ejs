@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/add_Lead.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
     <!-- Add CKEditor script -->
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Thêm khách hàng tiềm năng</title>
 </head>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="title__column_two"><label for="">Tên người *</label></div>
                             <div class="row_two__input">
-                                <input type="text" name="name" id="">
+                                <input type="text" name="name" id="" required>
                             </div>
                             <div class="title__column_two"><label for="">Tên tổ chức</label></div>
                             <div class="row_two__input">
@@ -362,10 +362,18 @@
 
 
         CKEDITOR.replace('editor');
+        // hides the notifications area in CKEditor, a WYSIWYG text editor.
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof CKEDITOR !== 'undefined') {
+                // Find the instance of CKEditor and set the configuration
+                for (var instance in CKEDITOR.instances) {
+                    if (CKEDITOR.instances.hasOwnProperty(instance)) {
+                        CKEDITOR.instances[instance].config.versionCheck = false;
+                    }
+                }
+            }
+        });
 
-        CKEDITOR.editorConfig = function (config) {
-            config.versionCheck = false;
-        };
         // Cập nhật chức năng collapsible
         document.querySelectorAll('.section-title').forEach(function (title) {
             title.addEventListener('click', function () {

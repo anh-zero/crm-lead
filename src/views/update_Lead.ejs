@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/add_Lead.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Thêm khách hàng tiềm năng</title>
 </head>
@@ -121,7 +121,7 @@
                 <!-- content__main -->
                 <div class="content__main">
                     <div class="content__row_first">
-                        <input type="checkbox" name="is_company" id="" value="<%= dataUser.is_company%>">
+                        <input type="checkbox" name="is_company" id="" <%=dataUser.is_company=='1' ? 'checked' : '' %> >
                         <span>Khách hàng tiềm năng là một tổ chức</span>
                     </div>
                     <div class="content__row_two">
@@ -353,11 +353,13 @@
                                 <input type="text" name="print_language" id="" value="<%= dataUser.print_language%>">
                             </div>
                             <div class="row_two__checkbox">
-                                <input type="checkbox" name="unsubscribe" id="" value="<%= dataUser.unsubscribe%>">
+                                <input type="checkbox" name="unsubscribe" id="" <%=dataUser.unsubscribe=='1' ? 'checked'
+                                    : '' %> >
                                 <label for="">Hủy đăng ký</label>
                             </div>
                             <div class="row_two__checkbox">
-                                <input type="checkbox" name="followed_blog" id="" value="<%= dataUser.followed_blog%>">
+                                <input type="checkbox" name="followed_blog" id="" <%=dataUser.followed_blog=='1'
+                                    ? 'checked' : '' %> >
                                 <label for="">Người theo dõi blog</label>
                             </div>
                         </div>
@@ -371,9 +373,18 @@
     <script>
         // Cấu hình CKeditor cho notes
         CKEDITOR.replace('editor');
-        CKEDITOR.editorConfig = function (config) {
-            config.versionCheck = false;
-        };
+        // hides the notifications area in CKEditor, a WYSIWYG text editor.
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof CKEDITOR !== 'undefined') {
+                // Find the instance of CKEditor and set the configuration
+                for (var instance in CKEDITOR.instances) {
+                    if (CKEDITOR.instances.hasOwnProperty(instance)) {
+                        CKEDITOR.instances[instance].config.versionCheck = false;
+                    }
+                }
+            }
+        });
+
         // Cập nhật chức năng collapsible
         document.querySelectorAll('.section-title').forEach(function (title) {
             title.addEventListener('click', function () {

@@ -15,12 +15,12 @@ CREATE TABLE `crm-lead`.`leads` (
     `campaign` VARCHAR(255),
     -- form follow
     `next_contact` varchar(100),
-    `next_at` TIMESTAMP,
-    `end_at` TIMESTAMP,
+    `next_at` DATE,
+    `end_at` DATE,
     -- form note
     `notes` TEXT,
     -- form address and contact
-    `address_type` ENUM('thanh-toan','van-chuyen','van-phong','ca-nhan','nha-may','buu-chinh','cua-hang','chuyen-doi','cong-ty-con','kho-hang','hien-tai','dai-han','khac'),
+    `address_type` ENUM('payment','shipping','office','personal','factory','portal','shop','convert','sub-company','warehouse','current','longterm','other'),
     `address_name` VARCHAR(255),
     `street_address1` VARCHAR(255),
     `street_address2` VARCHAR(255),
@@ -35,10 +35,10 @@ CREATE TABLE `crm-lead`.`leads` (
     `fax` VARCHAR(20),
     `website` VARCHAR(255),
     -- form more information
-    `lead_type` ENUM('khach-hang','doi-tac','tu-van'),
+    `lead_type` ENUM('undefined', 'customer', 'partner', 'adviser'),
     `market_segment` VARCHAR(100),
     `industry` VARCHAR(100),
-    `request_type` ENUM('dat-hang-sp', 'yctt', 'de-xuat', 'khac'),
+    `request_type` ENUM('undefined','order', 'information_request', 'propose', 'other'),
     `company` VARCHAR(100),
     `nation` VARCHAR(100),
     `print_language` VARCHAR(100),
@@ -52,4 +52,4 @@ CREATE INDEX `idx_owner` ON `crm-lead`.`leads`(owner);
 CREATE INDEX `idx_status` ON `crm-lead`.`leads`(status);
 CREATE INDEX `idx_code` ON `crm-lead`.`leads`(code);
 
-SHOW INDEX FROM `crm-lead`.`leads`;
+SELECT * FROM `crm-lead`.`leads`;
