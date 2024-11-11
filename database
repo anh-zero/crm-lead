@@ -45,6 +45,7 @@ CREATE TABLE `crm-lead`.`leads` (
     `print_language` VARCHAR(100),
     `unsubscribe` BOOLEAN DEFAULT FALSE,
     `followed_blog` BOOLEAN DEFAULT FALSE
+    `profile_image` VARCHAR(100),
 );
 
 CREATE INDEX `idx_name` ON `crm-lead`.`leads`(name);
