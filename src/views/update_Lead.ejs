@@ -57,7 +57,7 @@
         </header>
 
         <!-- nav -->
-        <form action="/update-lead" method="post">
+        <form action="/update-lead" method="post" enctype="multipart/form-data">
             <nav>
                 <div class="nav__main">
                     <!-- nav__first -->
@@ -90,14 +90,19 @@
                 <div class="sidebar">
                     <div class="up__img">
                         <div class="profile-pic">
-                            <img id="profileImage" src="" alt="Profile Picture" />
-                            <div class="dropdown" onclick="document.getElementById('fileInput').click();">
-                                Thay đổi
-                                <i class="fas fa-caret-down"></i>
-                            </div>
-                            <div class="delete-btn" id="deleteBtn" onclick="deleteImage()">Xóa</div>
+                            <% if(dataUser.profile_image) { %>
+                                <img id="profileImage" src="/image/<%=dataUser.profile_image%>" alt="Profile Picture" />
+                                <% } else {%>
+                                    <img id="profileImage" src="/image/default.jpg" alt="Profile Picture" />
+                                    <% } %>
+                                        <div class="dropdown" onclick="document.getElementById('fileInput').click();">
+                                            Thay đổi
+                                            <i class="fas fa-caret-down"></i>
+                                        </div>
+                                        <div class="delete-btn" id="deleteBtn" onclick="deleteImage()">Xóa</div>
                         </div>
-                        <input type="file" id="fileInput" accept="image/*" onchange="loadFile(event)" hidden>
+                        <input type="file" name="profile_image" id="fileInput" accept="image/*"
+                            onchange="loadFile(event)" hidden>
                     </div>
 
                     <ul class="up__file">
@@ -106,7 +111,7 @@
                         <li class="file__title">File đính kèm</li>
                         <li class="up__file-item">
                             <label for="up_file-item"> <span>Tập tin đính kèm</span> <span>+</span></label>
-                            <input type="file" name="" id="up_file-item" hidden>
+                            <!-- <input type="file" name="" id="up_file-item" hidden> -->
                         </li>
                         <li class="file__title">Nhận xét</li>
                         <li class="file__link"><a href="">+</a></li>
@@ -371,6 +376,26 @@
     </div>
 
     <script>
+        // Hàm hiển thị ảnh người dùng đã chọn
+        function loadFile(event) {
+            const profileImage = document.getElementById('profileImage');
+            const deleteBtn = document.getElementById('deleteBtn');
+
+            profileImage.src = URL.createObjectURL(event.target.files[0]);
+            deleteBtn.style.display = 'block'; // Hiển thị nút "Xóa" khi có ảnh
+        }
+
+        // Hàm xóa ảnh và ẩn nút "Xóa"
+        function deleteImage() {
+            const profileImage = document.getElementById('profileImage');
+            const fileInput = document.getElementById('fileInput');
+            const deleteBtn = document.getElementById('deleteBtn');
+
+            profileImage.src = ""; // Đặt ảnh về mặc định
+            fileInput.value = ""; // Xóa giá trị của input file
+            deleteBtn.style.display = 'none'; // Ẩn nút "Xóa"
+        }
+
         // Cấu hình CKeditor cho notes
         CKEDITOR.replace('editor');
         // hides the notifications area in CKEditor, a WYSIWYG text editor.

@@ -1,4 +1,5 @@
 import pool from "../config/connectDB";
+
 let getHomePage = (req, res) => {
     return res.render("homepage.ejs", {
         user: req.user
@@ -34,22 +35,11 @@ let getEditPage = async (req, res) => {
 
     return res.render('update_Lead.ejs', { dataUser });
 }
+
 let postUpdateLead = async (req, res) => {
-    let {
-        is_company, name, organization, email, owner, status, salutation,
-        position, gender, source, campaign, next_contact, next_at, end_at,
-        notes, address_type, address_name, street_address1, street_address2,
-        city, district, state_province, country, postal_code, forward,
-        mobile_phone, fax, website, lead_type, market_segment, industry,
-        request_type, company, nation, print_language, unsubscribe,
-        followed_blog, id
-    } = req.body;
-    is_company = is_company === 'on' ? 1 : 0;
-    unsubscribe = unsubscribe === 'on' ? 1 : 0;
-    followed_blog = followed_blog === 'on' ? 1 : 0;
-    await pool.execute(
-        'update leads set is_company = ?, name = ?, organization = ?, email = ?, owner = ?, status = ?, salutation = ?, position = ?, gender = ?,source = ?, campaign = ?, next_contact = ?, next_at = ?, end_at = ?,notes = ?, address_type = ?, address_name = ?, street_address1 = ?, street_address2 = ?, city = ?, district=?, state_province = ?, country = ?, postal_code = ?, forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?, market_segment = ?, industry = ?,request_type = ?, company = ?, nation = ?, print_language = ?, unsubscribe = ?, followed_blog = ? where id = ?',
-        [
+    try {
+        // Access form data from req.body
+        let {
             is_company, name, organization, email, owner, status, salutation,
             position, gender, source, campaign, next_contact, next_at, end_at,
             notes, address_type, address_name, street_address1, street_address2,
@@ -57,12 +47,58 @@ let postUpdateLead = async (req, res) => {
             mobile_phone, fax, website, lead_type, market_segment, industry,
             request_type, company, nation, print_language, unsubscribe,
             followed_blog, id
-        ]
-    );
-    // Instead of redirecting to /lead
-    // Redirect back to the same edit page
-    return res.redirect(`/edit-lead/${req.body.id}`);
-}
+        } = req.body;
+
+        // Convert checkbox values to integers
+        is_company = is_company === 'on' ? 1 : 0;
+        unsubscribe = unsubscribe === 'on' ? 1 : 0;
+        followed_blog = followed_blog === 'on' ? 1 : 0;
+
+        // Get the profile image filename if uploaded
+        let profile_image = req.file ? req.file.filename : null;
+
+        // Prepare the query and parameters
+        let query = `
+            UPDATE leads SET
+                is_company = ?, name = ?, organization = ?, email = ?, owner = ?,
+                status = ?, salutation = ?, position = ?, gender = ?, source = ?,
+                campaign = ?, next_contact = ?, next_at = ?, end_at = ?, notes = ?,
+                address_type = ?, address_name = ?, street_address1 = ?, street_address2 = ?,
+                city = ?, district = ?, state_province = ?, country = ?, postal_code = ?,
+                forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?,
+                market_segment = ?, industry = ?, request_type = ?, company = ?, nation = ?,
+                print_language = ?, unsubscribe = ?, followed_blog = ?
+                ${profile_image ? ', profile_image = ?' : ''}
+            WHERE id = ?`;
+
+        // Build parameters array
+        let params = [
+            is_company, name, organization, email, owner, status, salutation,
+            position, gender, source, campaign, next_contact, next_at, end_at,
+            notes, address_type, address_name, street_address1, street_address2,
+            city, district, state_province, country, postal_code, forward,
+            mobile_phone, fax, website, lead_type, market_segment, industry,
+            request_type, company, nation, print_language, unsubscribe,
+            followed_blog
+        ];
+
+        if (profile_image) {
+            params.push(profile_image);
+        }
+
+        params.push(id);
+
+        // Execute the query
+        await pool.execute(query, params);
+
+        // Redirect back to the edit page
+        return res.redirect(`/edit-lead/${id}`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+};
+
 let bulkDeleteLeads = async (req, res) => {
     const ids = req.body.ids; // This should be an array of IDs
     if (!ids || !Array.isArray(ids)) {

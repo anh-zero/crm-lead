@@ -1,3 +1,4 @@
+CREATE DATABASE `crm-lead`;
 CREATE TABLE `crm-lead`.`leads` (
     `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `is_company` BOOLEAN DEFAULT FALSE, 
@@ -52,4 +53,11 @@ CREATE INDEX `idx_owner` ON `crm-lead`.`leads`(owner);
 CREATE INDEX `idx_status` ON `crm-lead`.`leads`(status);
 CREATE INDEX `idx_code` ON `crm-lead`.`leads`(code);
 
-SELECT * FROM `crm-lead`.`leads`;
+CREATE TABLE `crm-lead`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fullname` VARCHAR(45) NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
+
+
