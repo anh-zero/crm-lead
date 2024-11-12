@@ -6,10 +6,44 @@ let getHomePage = (req, res) => {
     })
 };
 let showLeads = async (req, res) => {
-    let data = [];
-    const [rows, fields] = await pool.execute('select * from leads');
-    return res.render('lead.ejs', { dataUser: rows });
-}
+    // Extract filters from the query parameters
+    let { name, status, code } = req.query;
+
+    // Initialize the base query and parameters array
+    let query = 'SELECT * FROM leads';
+    let params = [];
+    let conditions = [];
+
+    // Add conditions based on provided filters
+    if (name && name.trim() !== '') {
+        conditions.push('name LIKE ?');
+        params.push(`%${name}%`);
+    }
+
+    if (status && status.trim() !== '') {
+        conditions.push('status = ?');
+        params.push(status);
+    }
+
+    if (code && code.trim() !== '') {
+        conditions.push('code LIKE ?');
+        params.push(`%${code}%`);
+    }
+
+    // Append WHERE clause if there are any conditions
+    if (conditions.length > 0) {
+        query += ' WHERE ' + conditions.join(' AND ');
+    }
+
+    // Execute the query
+    const [rows] = await pool.execute(query, params);
+
+    // Render the template with data and query parameters
+    res.render('lead.ejs', {
+        dataUser: rows,
+        query: req.query
+    });
+};
 let deleteLead = async (req, res) => {
     let userId = req.params.userId;
     await pool.execute('delete from leads where id = ?', [userId])

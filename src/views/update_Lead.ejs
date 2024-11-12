@@ -158,16 +158,27 @@
                             </div>
                             <div class="title__column_two"><label for="">Trạng thái *</label></div>
                             <div class="row_two__select">
-                                <select value="<%= dataUser.status%>" name="status" id="">
-                                    <option value="potential">Khách hàng tiềm năng</option>
-                                    <option value="open">Đã mở</option>
-                                    <option value="responded">Đã phản hồi</option>
-                                    <option value="opportunity">Cơ hội</option>
-                                    <option value="quote">Báo giá</option>
-                                    <option value="lost-quot">Mất Báo giá</option>
-                                    <option value="care">Quan tâm</option>
-                                    <option value="convert">Chuyển đổi</option>
-                                    <option value="no_contact">Không liên hệ</option>
+                                <select name="status" id="">
+                                    <option value="potential" <%=dataUser.status==='potential' ? 'selected' : '' %>
+                                        >Khách hàng tiềm năng</option>
+                                    <option value="open" <%=dataUser.status==='open' ? 'selected' : '' %>>Đã mở</option>
+                                    <option value="responded" <%=dataUser.status==='responded' ? 'selected' : '' %>>Đã
+                                        phản hồi</option>
+                                    <option value="opportunity" <%=dataUser.status==='opportunity' ? 'selected' : '' %>
+                                        >Cơ
+                                        hội</option>
+                                    <option value="quote" <%=dataUser.status==='quote' ? 'selected' : '' %>>Báo giá
+                                    </option>
+                                    <option value="lost_quote" <%=dataUser.status==='lost_quote' ? 'selected' : '' %>
+                                        >Mất
+                                        Báo giá</option>
+                                    <option value="care" <%=dataUser.status==='care' ? 'selected' : '' %>>Quan tâm
+                                    </option>
+                                    <option value="convert" <%=dataUser.status==='convert' ? 'selected' : '' %>>Chuyển
+                                        đổi
+                                    </option>
+                                    <option value="no_contact" <%=dataUser.status==='no_contact' ? 'selected' : '' %>
+                                        >Không liên hệ</option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Xưng hô</label></div>
@@ -234,20 +245,33 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Loại địa chỉ</label></div>
                             <div class="row_two__select">
-                                <select name="address_type" id="" value="<%= dataUser.address_type%>">
-                                    <option default value="payment">Thanh toán</option>
-                                    <option value="shipping">vận chuyển</option>
-                                    <option value="office">Văn phòng</option>
-                                    <option value="personal">Cá nhân</option>
-                                    <option value="factory">Nhà máy</option>
-                                    <option value="postal">Bưu chính</option>
-                                    <option value="store">Cửa hàng</option>
-                                    <option value="convert">Chuyển đổi</option>
-                                    <option value="subsidiary">Công ty con</option>
-                                    <option value="warehouse">Kho hàng</option>
-                                    <option value="current">Hiện tại</option>
-                                    <option value="longterm">Dài hạn</option>
-                                    <option value="other">Khác</option>
+                                <select name="address_type" id="">
+                                    <option value="payment" <%=dataUser.address_type==='payment' ? 'selected' : '' %>
+                                        >Thanh toán</option>
+                                    <option value="shipping" <%=dataUser.address_type==='shipping' ? 'selected' : '' %>
+                                        >vận chuyển</option>
+                                    <option value="office" <%=dataUser.address_type==='office' ? 'selected' : '' %>>Văn
+                                        phòng</option>
+                                    <option value="personal" <%=dataUser.address_type==='personal' ? 'selected' : '' %>
+                                        >Cá nhân</option>
+                                    <option value="factory" <%=dataUser.address_type==='factory' ? 'selected' : '' %>
+                                        >Nhà máy</option>
+                                    <option value="postal" <%=dataUser.address_type==='postal' ? 'selected' : '' %>>Bưu
+                                        chính</option>
+                                    <option value="store" <%=dataUser.address_type==='store' ? 'selected' : '' %>>Cửa
+                                        hàng</option>
+                                    <option value="convert" <%=dataUser.address_type==='convert' ? 'selected' : '' %>
+                                        >Chuyển đổi</option>
+                                    <option value="subsidiary" <%=dataUser.address_type==='subsidiary' ? 'selected' : ''
+                                        %>>Công ty con</option>
+                                    <option value="warehouse" <%=dataUser.address_type==='warehouse' ? 'selected' : ''
+                                        %>>Kho hàng</option>
+                                    <option value="current" <%=dataUser.address_type==='current' ? 'selected' : '' %>
+                                        >Hiện tại</option>
+                                    <option value="longterm" <%=dataUser.address_type==='longterm' ? 'selected' : '' %>
+                                        >Dài hạn</option>
+                                    <option value="other" <%=dataUser.address_type==='other' ? 'selected' : '' %>>Khác
+                                    </option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Tên địa chỉ</label></div>
@@ -317,11 +341,15 @@
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Loại tiềm năng</label></div>
                             <div class="row_two__select">
-                                <select name="lead_type" id="" value="<%= dataUser.lead_type%>">
-                                    <option default value="undefined"></option>
-                                    <option value="customer">Khách hàng</option>
-                                    <option value="partner">Đối tác</option>
-                                    <option value="adviser">Tư vấn</option>
+                                <select name="lead_type" id="">
+                                    <option value="undefined" <%=dataUser.lead_type==='undefined' ? 'selected' : '' %>>
+                                    </option>
+                                    <option value="customer" <%=dataUser.lead_type==='customer' ? 'selected' : '' %>
+                                        >Khách hàng</option>
+                                    <option value="partner" <%=dataUser.lead_type==='partner' ? 'selected' : '' %>>Đối
+                                        tác</option>
+                                    <option value="adviser" <%=dataUser.lead_type==='adviser' ? 'selected' : '' %>>Tư
+                                        vấn</option>
                                 </select>
                             </div>
                             <div class="title__column_two"><label for="">Phân khúc thị trường</label></div>
@@ -335,11 +363,16 @@
                             <div class="title__column_two"><label for="">Yêu cầu loại</label></div>
                             <div class="row_two__select">
                                 <select name="request_type" id="" value="<%= dataUser.request_type%>">
-                                    <option default value="undefined"></option>
-                                    <option value="order">Đặt hàng sản phẩm</option>
-                                    <option value="information_request">Yêu cầu thông tin</option>
-                                    <option value="propose">Đề xuất</option>
-                                    <option value="other">Khác</option>
+                                    <option value="undefined" <%=dataUser.request_type==='undefined' ? 'selected' : ''
+                                        %>></option>
+                                    <option value="order" <%=dataUser.request_type==='order' ? 'selected' : '' %>>Đặt
+                                        hàng sản phẩm</option>
+                                    <option value="information_request" <%=dataUser.request_type==='information_request'
+                                        ? 'selected' : '' %>>Yêu cầu thông tin</option>
+                                    <option value="propose" <%=dataUser.request_type==='propose' ? 'selected' : '' %>>Đề
+                                        xuất</option>
+                                    <option value="other" <%=dataUser.request_type==='other' ? 'selected' : '' %>>Khác
+                                    </option>
                                 </select>
                             </div>
                         </div>

@@ -136,28 +136,38 @@
         <div class="content">
             <!-- sidebar -->
             <div class="sidebar">
-                <div class="sidebar__first">
-                    <ul class="sidebar__list">
-                        <li class="sidebar__title">Lọc theo</li>
-                        <li class="sidebar__list-item"><a href="#">Được giao cho <i
-                                    class="fa-solid fa-chevron-down"></i></a></li>
-                        <li class="sidebar__list-item"><a href="#">Được tạo bởi <i
-                                    class="fa-solid fa-chevron-down"></i></a> </li>
-                        <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li>
-                        <li class="sidebar__list-item"><a href="#">Nhãn <i class="fa-solid fa-chevron-down"></i></a>
-                        </li>
-                        <li class="sidebar__title-link"><a href="#">Hiện nhãn</a></li>
-                    </ul>
-                </div>
+                <form action="/lead" method="get">
+                    <div class="sidebar__first">
+                        <ul class="sidebar__list">
+                            <li class="sidebar__title">Lọc theo</li>
+                            <li class="sidebar__list-item"><select>
+                                    <option>Được giao cho</option>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </select></li>
+                            <li class="sidebar__list-item"><select>
+                                    <option>Được tạo bởi</option>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </select></li>
+                            <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li>
+                            <li class="sidebar__list-item">
+                            <li class="sidebar__list-item"><select>
+                                    <option>Nhãn</option>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </select></li></i></a>
+                            </li>
+                            <li class="sidebar__title-link"><a href="#">Hiện nhãn</a></li>
+                        </ul>
+                    </div>
 
-                <div class="sidebar__second">
-                    <ul class="sidebar__list">
-                        <li>
-                        <li class="sidebar__title">Lưu bộ lọc</li>
-                        <li><input class="sidebar__input" type="text" name="" id="" placeholder="Tên bộ lọc"></li>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="sidebar__second">
+                        <ul class="sidebar__list">
+                            <li>
+                            <li class="sidebar__title">Lưu bộ lọc</li>
+                            <li><input class="sidebar__input" type="text" name="" id="" placeholder="Tên bộ lọc"></li>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
             </div>
 
             <!-- content__main -->
@@ -167,82 +177,118 @@
 
                     <!-- header -->
                     <div class="content-header">
-                        <div class="content-header__first">
-                            <div class="header-name"><input type="text" name="" id="" placeholder="Tên"></div>
-                            <div class="header-status">
-                                <select name="" id="" placeholder="">
-                                    <option value="#"></option>
-                                </select>
+                        <form action="/lead" method="GET">
+                            <div class="content-header__first">
+                                <div class="header-name">
+                                    <input type="text" name="name" placeholder="Tên" value="<%= query.name || '' %>"
+                                        onchange="this.form.submit()">
+                                </div>
+                                <div class="header-status">
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="" <%=!query.status ? 'selected' : '' %>>Tất cả trạng thái
+                                        </option>
+                                        <option value="potential" <%=query.status==='potential' ? 'selected' : '' %>
+                                            >KHTN</option>
+                                        <option value="open" <%=query.status==='open' ? 'selected' : '' %>>Đang mở
+                                        </option>
+                                        <option value="responded" <%=query.status==='responded' ? 'selected' : '' %>>Đã
+                                            phản hồi</option>
+                                        <option value="opportunity" <%=query.status==='opportunity' ? 'selected' : '' %>
+                                            >Cơ hội</option>
+                                        <option value="quote" <%=query.status==='quote' ? 'selected' : '' %>>Báo giá
+                                        </option>
+                                        <option value="lost-quote" <%=query.status==='lost-quote' ? 'selected' : '' %>
+                                            >Mất báo giá</option>
+                                        <option value="care" <%=query.status==='care' ? 'selected' : '' %>>Quan tâm
+                                        </option>
+                                        <option value="convert" <%=query.status==='convert' ? 'selected' : '' %>>Chuyển
+                                            đổi</option>
+                                        <option value="no_contact" <%=query.status==='no_contact' ? 'selected' : '' %>
+                                            >Không liên hệ</option>
+                                        <!-- Add other statuses as needed -->
+                                    </select>
+                                </div>
+                                <div class="header-title">
+                                    <input type="text" name="code" placeholder="Mã số" value="<%= query.code || '' %>"
+                                        onchange="this.form.submit()">
+                                </div>
                             </div>
-                            <div class="header-title"><input type="text" name="" id="" placeholder="Tiêu đề"></div>
-                        </div>
 
-                        <div class="content-header__second">
-                            <div class="header_filter">
-                                <button type="submit"><i class="fas fa-filter"></i> Bộ lọc</button>
+                            <div class="content-header__second">
+                                <div class="header_filter">
+                                    <!-- You can remove the submit button if not needed -->
+                                </div>
+                                <!-- Other buttons or elements -->
                             </div>
-
-                            <div class="header__Down_up">
-                                <button class="header_btn_down-up" type="submit"><i
-                                        class="fas fa-sort-amount-down"></i></button>
-                                <button class="header_btn_filter" type="submit">Sửa lần cuối vào</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="content-all">
                         <table class="datatable">
                             <thead>
                                 <tr>
                                     <th><input id="check_all" type="checkbox"></th>
-                                    <th>Tiêu đề</th>
+                                    <th>Tên</th>
                                     <th>Tên tổ chức</th>
                                     <th>Người sở hữu tiềm năng</th>
                                     <th>Trạng thái</th>
-                                    <th>Tên</th>
+                                    <th>Mã số</th>
                                 </tr>
                             </thead>
-                            <% for(let i=0; i < dataUser.length; i++) { %>
-                                <tbody>
-                                    <tr class="even_col">
-                                        <td><input class="abcd" type="checkbox" name="row-check"
-                                                value="<%= dataUser[i].id %>"></td>
-                                        <td>
-                                            <%=dataUser[i].name %>
-                                        </td>
-                                        <td>
-                                            <%=dataUser[i].organization %>
-                                        </td>
-                                        <td>
-                                            <%=dataUser[i].owner %>
-                                        </td>
-                                        <td>
-                                            <% if (dataUser[i].status==='potential' ) { %>
-                                                Khách hàng tiềm năng
-                                                <% } else if (dataUser[i].status==='open' ) { %>
-                                                    Đã mở
-                                                    <% } else if (dataUser[i].status==='responded' ) { %>
-                                                        Đã phản hồi
-                                                        <% } else if (dataUser[i].status==='opportunity' ) { %>
-                                                            Cơ hội
-                                                            <% } else if (dataUser[i].status==='quote' ) { %>
-                                                                Báo giá
-                                                                <% } else if (dataUser[i].status==='lost-quote' ) { %>
-                                                                    mất báo giá
-                                                                    <% } else if (dataUser[i].status==='convert' ) { %>
-                                                                        Chuyển đổi
-                                                                        <% } else if (dataUser[i].status==='no-contact'
-                                                                            ) { %>
-                                                                            Không liên hệ
-                                                                            <% } else { %>
-                                                                                <%= dataUser[i].status %>
-                                                                                    <% } %>
-                                        </td>
-                                        <td>
-                                            <%=dataUser[i].code %>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <% } %>
+                            <tbody>
+                                <% if (dataUser && dataUser.length> 0) { %>
+                                    <% for (let i=0; i < dataUser.length; i++) { %>
+                                        <tr class="even_col">
+                                            <td>
+                                                <input class="abcd" type="checkbox" name="row-check"
+                                                    value="<%= dataUser[i].id %>">
+                                            </td>
+                                            <td>
+                                                <%= dataUser[i].name %>
+                                            </td>
+                                            <td>
+                                                <%= dataUser[i].organization %>
+                                            </td>
+                                            <td>
+                                                <%= dataUser[i].owner %>
+                                            </td>
+                                            <td>
+                                                <% if (dataUser[i].status==='potential' ) { %>
+                                                    Khách hàng tiềm năng
+                                                    <% } else if (dataUser[i].status==='open' ) { %>
+                                                        Đã mở
+                                                        <% } else if (dataUser[i].status==='responded' ) { %>
+                                                            Đã phản hồi
+                                                            <% } else if (dataUser[i].status==='opportunity' ) { %>
+                                                                Cơ hội
+                                                                <% } else if (dataUser[i].status==='quote' ) { %>
+                                                                    Báo giá
+                                                                    <% } else if (dataUser[i].status==='lost-quote' )
+                                                                        {%>
+                                                                        Mất báo giá
+                                                                        <% } else if (dataUser[i].status==='care' ) {%>
+                                                                            Quan tâm
+                                                                            <% } else if (dataUser[i].status==='convert'
+                                                                                ) { %>
+                                                                                Chuyển đổi
+                                                                                <% } else if
+                                                                                    (dataUser[i].status==='no_contact' )
+                                                                                    {%>
+                                                                                    Không liên hệ
+                                                                                    <% } else { %>
+                                                                                        <%= dataUser[i].status %>
+                                                                                            <% } %>
+                                            </td>
+                                            <td>
+                                                <%= dataUser[i].code %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="6">Không tìm thấy lead nào.</td>
+                                                </tr>
+                                                <% } %>
+                            </tbody>
                         </table>
                     </div>
                 </div>

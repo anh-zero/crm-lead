@@ -8,7 +8,7 @@ CREATE TABLE `crm-lead`.`leads` (
     `organization` VARCHAR(255),
     `email` VARCHAR(100),
     `owner` VARCHAR(100),
-    `status` ENUM('potential', 'open', 'responded', 'opportunity', 'quote', 'lost-quote', 'care') DEFAULT 'potential',
+    `status` ENUM('potential', 'open', 'responded', 'opportunity', 'quote', 'lost_quote', 'care','convert','no_contact') DEFAULT 'potential',
     `salutation` VARCHAR(100),
     `position` VARCHAR(100),
     `gender` VARCHAR(20),
@@ -21,7 +21,7 @@ CREATE TABLE `crm-lead`.`leads` (
     -- form note
     `notes` TEXT,
     -- form address and contact
-    `address_type` ENUM('payment','shipping','office','personal','factory','portal','shop','convert','sub-company','warehouse','current','longterm','other'),
+    `address_type` ENUM('payment','shipping','office','personal','factory','postal','store','convert','subsidiary','warehouse','current','longterm','other'),
     `address_name` VARCHAR(255),
     `street_address1` VARCHAR(255),
     `street_address2` VARCHAR(255),
@@ -44,8 +44,10 @@ CREATE TABLE `crm-lead`.`leads` (
     `nation` VARCHAR(100),
     `print_language` VARCHAR(100),
     `unsubscribe` BOOLEAN DEFAULT FALSE,
-    `followed_blog` BOOLEAN DEFAULT FALSE
+    `followed_blog` BOOLEAN DEFAULT FALSE,
     `profile_image` VARCHAR(100),
+    `attachment` VARCHAR(255),
+    `assigned_for` VARCHAR(100)
 );
 
 CREATE INDEX `idx_name` ON `crm-lead`.`leads`(name);

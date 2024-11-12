@@ -1,7 +1,6 @@
 import pool from '../config/connectDB';
 
 let createNewLead = async (req, res) => {
-    console.log(req.body);
     let { is_company, name, organization, email, owner, status, salutation, position, gender, source, campaign, next_contact, next_at, end_at, notes, address_type, address_name, street_address1, street_address2, city, district,
         state_province, country, postal_code, forward, mobile_phone, fax, website, lead_type, market_segment, industry, request_type, company, nation, print_language, unsubscribe, followed_blog } = req.body;
 
