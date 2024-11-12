@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
+    <link rel="icon" href="/image/logo-black.png">
     <title>CRM</title>
 </head>
 
@@ -18,7 +19,7 @@
                 <div class="header__first">
                     <div class="header__first-logo">
                         <a class="header__first-logo-link" href="./home.html">
-                            <img src="/image/logo.jpeg" alt="">
+                            <img src="/image/logo-black.png" alt="">
                         </a>
                     </div>
                     <!-- header__first-input -->
@@ -38,8 +39,7 @@
                     <ul class="header__second-list">
                         <li class="header__second-item"><i class="fa-regular fa-bell"></i></li>
                         <li class="header__second-item">|</i></li>
-                        <li class="header__second-item help"><a href="#">Trợ Giúp <i
-                                    class="fas fa-chevron-down"></i></a></li>
+                        <li class="header__second-item help"><a href="#">Trợ Giúp <i class="fas fa-chevron-down"></i></a></li>
                         <li class="header__second-item"><i class="fas fa-user-circle"></i></li>
                     </ul>
                 </div>
@@ -67,12 +67,12 @@
                     <div class="sidebar__mobile">
                         <div class="sidebar__title">BỘ PHẬN</div>
                         <div class="sidebar__list">
-                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">CRM</a>
+                            <a class="sidebar__list-item" href="./home.html">Trang chủ</a>
                             <a class="sidebar__list-item" href="#">Kế toán</a>
                             <a class="sidebar__list-item" href="#">Tài Sản</a>
                             <a class="sidebar__list-item" href="#">Build</a>
                             <a class="sidebar__list-item" href="#">Mua hàng</a>
-                            <a class="sidebar__list-item" href="./crm.html">CRM</a>
+                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./crm.html">CRM</a>
                             <a class="sidebar__list-item" href="#">Nhân Sự</a>
                             <a class="sidebar__list-item" href="#">Khoản Vay</a>
                             <a class="sidebar__list-item" href="#">Bảng Lương</a>
@@ -85,13 +85,17 @@
                             <a class="sidebar__list-item" href="#">Cài Đặt</a>
                             <a class="sidebar__list-item" href="#">Tiện Ích</a>
                         </div>
+                        <div class="sidebar__list">
                         <div class="sidebar__title">TÊN MIỀN</div>
-                        <a class="sidebar__list-item" href="#">Sản xuất</a>
-                        <div class="sidebar__title">QUẢN TRỊ</div>
-                        <a class="sidebar__list-item" href="#">Tùy biến</a>
-                        <a class="sidebar__list-item" href="#">Tích hợp</a>
-                        <a class="sidebar__list-item" href="#">Công cụ</a>
-                        <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                            <a class="sidebar__list-item" href="#">Sản xuất</a>
+                        </div>
+                        <div class="sidebar__list">
+                            <div class="sidebar__title">QUẢN TRỊ</div>
+                            <a class="sidebar__list-item" href="#">Tùy biến</a>
+                            <a class="sidebar__list-item" href="#">Tích hợp</a>
+                            <a class="sidebar__list-item" href="#">Công cụ</a>
+                            <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                        </div>
                     </div>
                 </div>
 
@@ -113,12 +117,12 @@
             <div class="sidebar__PC">
                 <div class="sidebar__title">BỘ PHẬN</div>
                 <div class="sidebar__list">
-                    <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">CRM</a>
+                    <a class="sidebar__list-item" href="/homepage">Trang chủ</a>
                     <a class="sidebar__list-item" href="#">Kế toán</a>
                     <a class="sidebar__list-item" href="#">Tài Sản</a>
                     <a class="sidebar__list-item" href="#">Build</a>
                     <a class="sidebar__list-item" href="#">Mua hàng</a>
-                    <a class="sidebar__list-item" href="./crm.html">CRM</a>
+                    <a class="sidebar__list-item sidebar__list-item-chosen" href="./crm.html">CRM</a>
                     <a class="sidebar__list-item" href="#">Nhân Sự</a>
                     <a class="sidebar__list-item" href="#">Khoản Vay</a>
                     <a class="sidebar__list-item" href="#">Bảng Lương</a>
@@ -131,13 +135,19 @@
                     <a class="sidebar__list-item" href="#">Cài Đặt</a>
                     <a class="sidebar__list-item" href="#">Tiện Ích</a>
                 </div>
-                <div class="sidebar__title">TÊN MIỀN</div>
-                <a class="sidebar__list-item" href="#">Sản xuất</a>
-                <div class="sidebar__title">QUẢN TRỊ</div>
-                <a class="sidebar__list-item" href="#">Tùy biến</a>
-                <a class="sidebar__list-item" href="#">Tích hợp</a>
-                <a class="sidebar__list-item" href="#">Công cụ</a>
-                <a class="sidebar__list-item" href="#">Người sử dụng</a>
+
+                <div class="sidebar__list">
+                    <div class="sidebar__title">TÊN MIỀN</div>
+                    <a class="sidebar__list-item" href="#">Sản xuất</a>
+                </div>
+
+                <div class="sidebar__list">
+                    <div class="sidebar__title">QUẢN TRỊ</div>
+                    <a class="sidebar__list-item" href="#">Tùy biến</a>
+                    <a class="sidebar__list-item" href="#">Tích hợp</a>
+                    <a class="sidebar__list-item" href="#">Công cụ</a>
+                    <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                </div>
             </div>
 
             <!-- content__main -->
@@ -156,53 +166,43 @@
                 <div class="content__main-title">Báo Cáo & Tính năng chính</div>
                 <div class="content__main-list-report">
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Bán hàng</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Bán hàng</span>
                         <a href="/lead"><span class="content__main-item-true">&#8226;</span> Khách hàng tiềm năng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Cơ hội</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Danh Sách Khách Hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Liên lạc</a>
                         <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Hội thoại</a>
-                        <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Nguồn khách hàng tiềm
-                            năng</a>
+                        <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Nguồn khách hàng tiềm năng</a>
                         <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Hợp đồng</a>
                         <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Cuộc hẹn</a>
-                        <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Đăng ký nhận bản
-                            tin</a>
+                        <a href="#"><span class=".content__main-item-report-false">&#8226;</span> Đăng ký nhận bản tin</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Báo cáo</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Báo cáo</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Chi tiết khách hàng tiềm
                             năng</a>
-                        <a href="#"><span class="content__main-item-true">&#8226;</span> Triển vọng tham gia nhưng
-                            không..</a>
-                        <a href="#"><span class="content__main-item-report-false">&#8226;</span> Thời gian phản hồi đầu
-                            tiên cho cơ..</a>
+                        <a href="#"><span class="content__main-item-true">&#8226;</span> Triển vọng tham gia nhưng không..</a>
+                        <a href="#"><span class="content__main-item-report-false">&#8226;</span> Thời gian phản hồi đầu tiên cho cơ..</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Khách hàng không được
                             kích hoạt</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Hiệu quả Chiến dịch</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Hiệu quả Chủ đầu tư</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Bảo trì</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Bảo trì</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Lịch trình bảo trì</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Chuyến thăm bảo trì</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Yêu cầu bảo hành</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Chiến dịch</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Chiến dịch</span>
                         <a href="./lead.html"><span class="content__main-item-report-false">&#8226;</span> Chiến
                             dịch</a>
                         <a href="#"><span class="content__main-item-report-false">&#8226;</span> Chiến dịch email</a>
-                        <a href="#"><span class="content__main-item-report-false">&#8226;</span> Bài đăng trên mạng xã
-                            hội</a>
+                        <a href="#"><span class="content__main-item-report-false">&#8226;</span> Bài đăng trên mạng xã hội</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Cài đặt</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Cài đặt</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhóm khách hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Quốc gia</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhân viên bán hàng</a>

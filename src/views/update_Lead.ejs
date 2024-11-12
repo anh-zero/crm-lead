@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/add_Lead.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <link rel="icon" href="/image/logo-black.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Thêm khách hàng tiềm năng</title>
 </head>
@@ -20,16 +21,17 @@
                 <!-- header__first -->
                 <div class="header__first">
                     <div class="header__first-logo">
-                        <a class="header__first-logo-link" href="./home.html">
-                            <img src="./img/logo.png" alt="">
+                        <a class="header__first-logo-link breadcrumb-item" href="./home.html">
+                            <img src="/image/logo-black.png" alt="">
                         </a>
-                    </div>
-                    <div class="breadcrumb">
-                        <a href="#" class="breadcrumb-item">CRM</a>
-                        <a href="#" class="breadcrumb-item">Khách hàng tiềm năng</a>
-                        <span class="breadcrumb-item active">
-                            <%=dataUser.code%>
-                        </span>
+
+                        <div class="breadcrumb">
+                            <a href="/crm" class="breadcrumb-item">CRM</a>
+                            <a href="/lead" class="breadcrumb-item">Khách hàng tiềm năng</a>
+                            <a class="breadcrumb-item active">
+                                <%=dataUser.code%>
+                            </a>
+                        </div>
                     </div>
                     <!-- header__first-input -->
                     <div class="header__first-input">
@@ -111,7 +113,7 @@
                         <li class="file__title">File đính kèm</li>
                         <li class="up__file-item">
                             <label for="up_file-item"> <span>Tập tin đính kèm</span> <span>+</span></label>
-                            <!-- <input type="file" name="" id="up_file-item" hidden> -->
+                            <input type="file" name="" id="up_file-item" hidden>
                         </li>
                         <li class="file__title">Nhận xét</li>
                         <li class="file__link"><a href="">+</a></li>
@@ -428,7 +430,6 @@
             fileInput.value = ""; // Xóa giá trị của input file
             deleteBtn.style.display = 'none'; // Ẩn nút "Xóa"
         }
-
         // Cấu hình CKeditor cho notes
         CKEDITOR.replace('editor');
         // hides the notifications area in CKEditor, a WYSIWYG text editor.
@@ -467,7 +468,8 @@
                 icon.textContent = '▲';
             });
         });
-        const sidebar = document.querySelector('.c1_KHTN');
+
+        const sidebar = document.querySelector('.sidebar');
         const toggle_menu = document.querySelector('.toggle_menu');
         const content = document.querySelector('.content__main');
         const content6 = document.querySelector('.content__main-list-shortcut');
@@ -488,7 +490,6 @@
             content5.classList.toggle('expand');
             content6.classList.toggle('expand');
         }
-
     </script>
 </body>
 

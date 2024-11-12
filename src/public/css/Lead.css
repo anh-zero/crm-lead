@@ -37,6 +37,13 @@
         margin: 0 15px;
         flex-basis: 300px;
     }
+
+    .header__first-logo{
+        flex-basis: 280px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
     
     .header__first-logo img {
         width: 24px;
@@ -652,12 +659,14 @@ nav{
 }
 
 .breadcrumb-item {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #007bff; /* Change color as desired */
+    color: black; /* Change color as desired */
 }
 
 .breadcrumb-item.active {
-    color: #007bff; /* Color for active item */
+    color: black; /* Color for active item */
 }
 
 .breadcrumb-item:not(.active)::after {

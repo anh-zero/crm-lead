@@ -8,7 +8,7 @@
     <link href="/font/css/all.min.css" rel="stylesheet" />
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" /> -->
     <title>Trang Chủ</title>
-    <link rel="icon" href="/image/logo.jpeg">
+    <link rel="icon" href="/image/logo-black.png">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                 <div class="header__first">
                     <div class="header__first-logo">
                         <a class="header__first-logo-link" href="./home.html">
-                            <img src="/image/logo.jpeg" alt="">
+                            <img src="/image/logo-black.png" alt="">
                         </a>
                     </div>
                     <!-- header__first-input -->
@@ -42,13 +42,8 @@
                     <ul class="header__second-list">
                         <li class="header__second-item"><i class="fa-regular fa-bell"></i></li>
                         <li class="header__second-item">|</i></li>
-                        <li class="header__second-item help"><a href="#">Trợ Giúp <i
-                                    class="fas fa-chevron-down"></i></a></li>
-                        <li class="header__second-item">
-
-                            <label for="logout" class="fas">
-                                <%= user.fullname %>
-                            </label>
+                        <li class="header__second-item help"><a href="#">Trợ Giúp <i class="fas fa-chevron-down"></i></a></li>
+                        <li class="header__second-item"><label for="logout" class="fas fa-user-circle"></label>
                             <input type="checkbox" name="" class="ohyes" id="logout" hidden>
                             <label for="logout" class="overlay1"></label>
                             <ul class="logout">
@@ -60,11 +55,9 @@
                                 <li><a href="#">Demo</a></li>
                                 <li><a href="#">Demo</a></li>
                                 <li><a href="#">Demo</a></li>
-                                <li>
-                                    <form method="POST" action="/logout">
-                                        <button type="submit" class="btn btn-primary zerobtn">Log out</button>
-                                    </form>
-                                <li></li>
+                                <form method="POST" action="/logout">
+                                    <button type="submit" class="btn btn-primary zerobtn">Logout</button>
+                                </form>
                             </ul>
                         </li>
                     </ul>
@@ -113,12 +106,16 @@
                             <a class="sidebar__list-item" href="#">Tiện Ích</a>
                         </div>
                         <div class="sidebar__title">TÊN MIỀN</div>
-                        <a class="sidebar__list-item" href="#">Sản xuất</a>
+                        <div class="sidebar__list">
+                            <a class="sidebar__list-item" href="#">Sản xuất</a>
+                        </div>
                         <div class="sidebar__title">QUẢN TRỊ</div>
-                        <a class="sidebar__list-item" href="#">Tùy biến</a>
-                        <a class="sidebar__list-item" href="#">Tích hợp</a>
-                        <a class="sidebar__list-item" href="#">Công cụ</a>
-                        <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                        <div class="sidebar__list">
+                            <a class="sidebar__list-item" href="#">Tùy biến</a>
+                            <a class="sidebar__list-item" href="#">Tích hợp</a>
+                            <a class="sidebar__list-item" href="#">Công cụ</a>
+                            <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                        </div>
                     </div>
                 </div>
 
@@ -159,12 +156,16 @@
                     <a class="sidebar__list-item" href="#">Tiện Ích</a>
                 </div>
                 <div class="sidebar__title">TÊN MIỀN</div>
-                <a class="sidebar__list-item" href="#">Sản xuất</a>
+                <div class="sidebar__list">
+                    <a class="sidebar__list-item" href="#">Sản xuất</a>
+                </div>
                 <div class="sidebar__title">QUẢN TRỊ</div>
-                <a class="sidebar__list-item" href="#">Tùy biến</a>
-                <a class="sidebar__list-item" href="#">Tích hợp</a>
-                <a class="sidebar__list-item" href="#">Công cụ</a>
-                <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                <div class="sidebar__list">
+                    <a class="sidebar__list-item" href="#">Tùy biến</a>
+                    <a class="sidebar__list-item" href="#">Tích hợp</a>
+                    <a class="sidebar__list-item" href="#">Công cụ</a>
+                    <a class="sidebar__list-item" href="#">Người sử dụng</a>
+                </div>
             </div>
 
             <!-- content__main -->
@@ -182,16 +183,14 @@
                 <div class="content__main-title">Báo Cáo & Tính năng chính</div>
                 <div class="content__main-list-report">
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Kế toán</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Kế toán</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Biểu đồ tài khoản</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Công Ty</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Danh Sách Khách Hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhà Cung Cấp</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Kho</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Kho</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Sản phẩm</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Kho hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhãn</a>
@@ -199,22 +198,19 @@
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Kiểm kê, chốt kho</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Nhân sự</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Nhân sự</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhân Viên</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Công Cụ Chấm Công Nhân Viên</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Cơ cấu tiền lương</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">CRM</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> CRM</span>
                         <a href="/lead"><span class="content__main-item-true">&#8226;</span> Khách hàng tiềm năng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhóm khách hàng</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Quốc gia</a>
                     </div>
                     <div class="content__main-item-report">
-                        <i class="far fa-list-alt"></i>
-                        <span class="c2_4-title">Nhập và Cài đặt dữ liệu</span>
+                        <span class="c2_4-title"><i class="far fa-list-alt"></i> Nhập và Cài đặt dữ liệu</span>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Nhập dữ liệu</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Mở công cụ tạo hóa đơn</a>
                         <a href="#"><span class="content__main-item-true">&#8226;</span> Biểu đồ của nhà nhập tài

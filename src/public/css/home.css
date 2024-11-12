@@ -205,7 +205,7 @@
     }
     
     /* ==Content== */
-    .content{
+.content{
         display: flex;
         position: relative;
         max-width: 1260px;
@@ -213,44 +213,46 @@
         height: calc(100vh - 135px);
         margin: 0 auto;
         background-color: #f9fafa;
-    }
+}
     
-    .sidebar__PC{
-        max-width: 240px;
-        flex-basis: 185px;
-        padding: 0 15px;
-        margin-right: 15px;
-        overflow: auto;
-    }
+.sidebar__PC{
+    flex-basis: 185px;
+    padding: 0 15px;
+    margin-right: 15px;
+    overflow: auto;
+}
     
-    .sidebar__mobile .sidebar__title,
-    .sidebar__PC .sidebar__title{
+.sidebar__mobile .sidebar__title,
+.sidebar__PC .sidebar__title{
         font-size: 11px;
         color: #333C44;
-        margin: 8px 0 15px 15px;
+        margin: 15px 0;
     }
     
+    .sidebar__list{
+        display: flex;
+        flex-direction: column;
+    }
+
     .sidebar__mobile .sidebar__list-item,
     .sidebar__PC .sidebar__list-item{
-        display: block;
+        flex-basis: 100%;
         font-size: 14px;
         padding: 8px 12px;
-        margin: 4px 20px;
         text-decoration: none;
         color: #1f272e;
         border-radius: 5px;
     }
     
-    .sidebar__PC .sidebar__list-item:hover{
-        background-color: #EBEEF0;
-        border-radius: 10px;
-    }
-    
-    .sidebar__mobile .sidebar__list-item-chosen
+    .sidebar__mobile .sidebar__list-item-chosen,
     .sidebar__PC .sidebar__list-item-chosen{
         background-color: #EBEEF0;
     }
 
+    .sidebar__PC .sidebar__list-item:hover{
+        background-color: #EBEEF0;
+        border-radius: 10px;
+    }
 /* ==============mobile====== */
 .sidebar__mobile{
     position: fixed;
@@ -295,19 +297,23 @@
     
     .content__main-list-report{
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
     }
     
     /* content__report */
     .content__main-item-report{
-        width: 31%;
-        height: 371.8px;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        background-color: red;
         box-shadow: 0 1px 1px 1px gray;
         border-radius: 10px;
         background-color: #fff;
     }
     
     .c2_4-title{
+        margin-bottom: 5px;
         font-weight: 600;
     }
     

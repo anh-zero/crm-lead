@@ -12,12 +12,12 @@ table.datatable tr.odd_col {
 	background: none;
 }
 table.datatable tr.even_col {
-	background: #ddd;
+	height: 50px;
 }
 table.datatable td {
 	font-size:10pt;
 	padding:5px 10px;
-	border-bottom:1px solid #ddd;
+	border-bottom: 0.5px solid rgb(231, 228, 228);
 	text-align: left;
 }
 table.datatable th {
@@ -25,7 +25,45 @@ table.datatable th {
 	font-size: 8pt;
 	padding: 10px 10px 7px;   
 	text-transform: uppercase;
-	color: #fff;
-	background-color: black;
+	color: #687178;
 	font-family: sans-serif;
+}
+/* Chỉnh dữ liệu trong data */
+.title_data{
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.lead_data{
+	display: flex;
+	height: 100%;
+	justify-content: start;
+	background-color: #f4f5f6;
+	border-radius: 5px;
+}
+
+.data__status-dot{
+	display: block;
+	height: 100%;
+	width: 15px;
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	justify-content: center;
+	color: #333c44;
+}
+
+.data__status-content{
+	font-weight: 500;
+	color: #333c44;
+}
+
+.data_open{
+	background-color: #fff5f5;
+	color: #e24c4c;
+}
+
+.data_convert{
+	background-color: #EAF5EE;
+	color: #2F9D58;
 }
