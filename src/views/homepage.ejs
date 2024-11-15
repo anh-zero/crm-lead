@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home.css">
     <link href="/font/css/all.min.css" rel="stylesheet" />
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" /> -->
     <title>Trang Chủ</title>
     <link rel="icon" href="/image/logo-black.png">
 </head>
@@ -21,7 +20,7 @@
                 <!-- header__first -->
                 <div class="header__first">
                     <div class="header__first-logo">
-                        <a class="header__first-logo-link" href="./home.html">
+                        <a class="header__first-logo-link" href="/">
                             <img src="/image/logo-black.png" alt="">
                         </a>
                     </div>
@@ -42,24 +41,25 @@
                     <ul class="header__second-list">
                         <li class="header__second-item"><i class="fa-regular fa-bell"></i></li>
                         <li class="header__second-item">|</i></li>
-                        <li class="header__second-item help"><a href="#">Trợ Giúp <i class="fas fa-chevron-down"></i></a></li>
-                        <li class="header__second-item"><label for="logout" class="fas fa-user-circle"></label>
-                            <input type="checkbox" name="" class="ohyes" id="logout" hidden>
-                            <label for="logout" class="overlay1"></label>
-                            <ul class="logout">
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <li><a href="#">Demo</a></li>
-                                <form method="POST" action="/logout">
-                                    <button type="submit" class="btn btn-primary zerobtn">Logout</button>
-                                </form>
-                            </ul>
-                        </li>
+                        <li class="header__second-item help"><a href="#">Trợ Giúp <i
+                                    class="fas fa-chevron-down"></i></a></li>
+                        <form action="/logout" method="post">
+                            <li class="header__second-item"><label for="logout" class="fas fa-user-circle"></label>
+                                <input type="checkbox" name="" class="ohyes" id="logout" hidden>
+                                <label for="logout" class="overlay1"></label>
+                                <ul class="logout">
+                                    <!-- <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li> -->
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <div class="sidebar__mobile">
                         <div class="sidebar__title">BỘ PHẬN</div>
                         <div class="sidebar__list">
-                            <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
+                            <a class="sidebar__list-item sidebar__list-item-chosen" href="/">Trang chủ</a>
                             <a class="sidebar__list-item" href="#">Kế toán</a>
                             <a class="sidebar__list-item" href="#">Tài Sản</a>
                             <a class="sidebar__list-item" href="#">Build</a>
@@ -137,7 +137,7 @@
             <div class="sidebar__PC">
                 <div class="sidebar__title">BỘ PHẬN</div>
                 <div class="sidebar__list">
-                    <a class="sidebar__list-item sidebar__list-item-chosen" href="./home.html">Trang chủ</a>
+                    <a class="sidebar__list-item sidebar__list-item-chosen" href="/">Trang chủ</a>
                     <a class="sidebar__list-item" href="#">Kế toán</a>
                     <a class="sidebar__list-item" href="#">Tài Sản</a>
                     <a class="sidebar__list-item" href="#">Build</a>
@@ -223,29 +223,7 @@
         </div>
     </div>
 
-    <script>
-        const sidebar = document.querySelector('.sidebar__PC');
-        const toggle_menu = document.querySelector('.toggle_menu');
-        const content = document.querySelector('.content__main');
-        const content6 = document.querySelector('.content__main-list-shortcut');
-        const content1 = document.querySelector('.one');
-        const content2 = document.querySelector('.two');
-        const content3 = document.querySelector('.three');
-        const content4 = document.querySelector('.four');
-        const content5 = document.querySelector('.five');
-
-
-        toggle_menu.onclick = function () {
-            sidebar.classList.toggle('hide');
-            content.classList.toggle('expand');
-            content1.classList.toggle('expand');
-            content2.classList.toggle('expand');
-            content3.classList.toggle('expand');
-            content4.classList.toggle('expand');
-            content5.classList.toggle('expand');
-            content6.classList.toggle('expand');
-        }
-    </script>
+    <script src="/js/home.js"></script>
 </body>
 
 </html>
