@@ -63,4 +63,12 @@ CREATE TABLE `crm-lead`.`users` (
   `password` VARCHAR(255) NULL,
   PRIMARY KEY (`id`));
 
+CREATE TABLE `crm-lead`.`attachments` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `lead_id` INT NOT NULL,
+    `filename` VARCHAR(255) NOT NULL,
+    `original_name` VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
+);
 

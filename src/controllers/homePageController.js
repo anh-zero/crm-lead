@@ -53,7 +53,10 @@ let getEditPage = async (req, res) => {
     let id = req.params.id;
     let [user] = await pool.execute('SELECT * FROM leads WHERE id = ?', [id]);
     let dataUser = user[0];
-
+    let [attachmentRows] = await pool.execute(
+        'SELECT * FROM attachments WHERE lead_id = ?',
+        [id]
+    );
     // Format dates to YYYY-MM-DD
     if (dataUser.next_at) {
         dataUser.next_at = new Date(dataUser.next_at).toISOString().split('T')[0];
@@ -67,7 +70,10 @@ let getEditPage = async (req, res) => {
         dataUser.end_at = '';
     }
 
-    return res.render('update_Lead.ejs', { dataUser });
+    res.render('update_Lead.ejs', {
+        dataUser: dataUser,
+        attachments: attachmentRows,
+    });
 }
 
 let postUpdateLead = async (req, res) => {
@@ -88,10 +94,17 @@ let postUpdateLead = async (req, res) => {
         unsubscribe = unsubscribe === 'on' ? 1 : 0;
         followed_blog = followed_blog === 'on' ? 1 : 0;
 
-        // Get the profile image filename if uploaded
-        let profile_image = req.file ? req.file.filename : null;
+        // Handle uploaded files
+        const files = req.files;
+        let profile_image = files['profile_image'] ? files['profile_image'][0].filename : null;
+        let attachments = files['attachments'] || [];
 
-        // Prepare the query and parameters
+        // Process profile image (if any)
+        if (profile_image) {
+            // Include profile_image in your SQL query and parameters
+        }
+
+        // Build your SQL query to update the lead
         let query = `
             UPDATE leads SET
                 is_company = ?, name = ?, organization = ?, email = ?, owner = ?,
@@ -125,6 +138,16 @@ let postUpdateLead = async (req, res) => {
         // Execute the query
         await pool.execute(query, params);
 
+        // Process attachments (if any)
+        if (attachments.length > 0) {
+            for (const file of attachments) {
+                await pool.execute(
+                    'INSERT INTO attachments (lead_id, filename, original_name) VALUES (?, ?, ?)',
+                    [id, file.filename, file.originalname]
+                );
+            }
+        }
+
         // Redirect back to the edit page
         return res.redirect(`/edit-lead/${id}`);
     } catch (err) {
@@ -150,7 +173,6 @@ let bulkDeleteLeads = async (req, res) => {
         res.status(500).send('Internal Server Error.');
     }
 };
-
 module.exports = {
     getHomePage: getHomePage,
     showLeads: showLeads,

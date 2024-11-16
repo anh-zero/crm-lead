@@ -56,6 +56,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Display selected file name
+const fileInput = document.getElementById('attachments');
+const fileNameDisplay = document.getElementById('file-name-display');
+
+fileInput.addEventListener('change', function () {
+    // Remove this line to keep existing files displayed
+    // fileNameDisplay.innerHTML = '';
+
+    if (this.files && this.files.length > 0) {
+        // Loop through all selected files
+        for (let i = 0; i < this.files.length; i++) {
+            const file = this.files[i];
+            const listItem = document.createElement('li');
+            listItem.textContent = file.name;
+            fileNameDisplay.appendChild(listItem);
+        }
+    }
+});
+
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

@@ -660,15 +660,30 @@ nav {
     margin-left: 8px;
 }
 
+
 #file-name-display {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+
+#file-name-display li {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
-    display: block;
 }
-
+#existing-files-display{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+#existing-files-display li{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .sidebar{
     width:215px;
-    
 }

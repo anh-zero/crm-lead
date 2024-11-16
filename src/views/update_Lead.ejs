@@ -112,7 +112,8 @@
                     <div class="up__img">
                         <div class="profile-pic">
                             <% if(dataUser.profile_image) { %>
-                                <img id="profileImage" src="/image/<%=dataUser.profile_image%>" alt="Profile Picture" />
+                                <img id="profileImage" src="/upload/<%=dataUser.profile_image%>"
+                                    alt="Profile Picture" />
                                 <% } else {%>
                                     <img id="profileImage" src="/image/default.jpg" alt="Profile Picture" />
                                     <% } %>
@@ -125,30 +126,38 @@
                         <input type="file" name="profile_image" id="fileInput" accept="image/*"
                             onchange="loadFile(event)" hidden>
                     </div>
-
                     <ul class="up__file">
                         <li class="file__title">Được giao cho</li>
                         <li class="file__link"><a href="">+</a></li>
                         <li class="file__title">File đính kèm</li>
-                        <% if(dataUser.attachment) { %>
-                            <ul id="file-name-display">
-                                <%=dataUser.attachment%>
-                            </ul>
-                            <% } else {%>
-                                <ul id="file-name-display"></ul>
+                        <div id="existing-files">
+                            <% if (attachments && attachments.length> 0) { %>
+                                <ul id="existing-files-display">
+                                    <% attachments.forEach(function(file) { %>
+                                        <li>
+                                            <a href="/uploads/<%= file.filename %>" target="_blank">
+                                                <%= file.original_name %>
+                                            </a>
+                                        </li>
+                                        <% }); %>
+                                </ul>
                                 <% } %>
-                                    <li class="up__file-item">
-                                        <label for="up_file-item"> <span>Tập tin đính kèm</span> <span>+</span></label>
-                                        <input type="file" name="" id="up_file-item" hidden multiple>
-                                    </li>
-                                    <li class="file__title">Nhận xét</li>
-                                    <li class="file__link"><a href="">+</a></li>
-                                    <li class="file__title">Với chia sẻ</li>
-                                    <li class="file__link"><a href="">+</a></li>
-                                    <li class="file__title">Nhãn</li>
-                                    <li class="file_input"><input type="text" name="" id=""
-                                            placeholder="Thêm một đánh dấu ...">
-                                    </li>
+                        </div>
+                        <ul id="file-name-display"></ul>
+                        <li class="up__file-item">
+                            <label for="attachments">
+                                <span>Tập tin đính kèm</span>
+                                <span>+</span>
+                            </label>
+                            <input type="file" name="attachments" id="attachments" hidden multiple>
+                        </li>
+                        <li class="file__title">Nhận xét</li>
+                        <li class="file__link"><a href="">+</a></li>
+                        <li class="file__title">Với chia sẻ</li>
+                        <li class="file__link"><a href="">+</a></li>
+                        <li class="file__title">Nhãn</li>
+                        <li class="file_input"><input type="text" name="" id="" placeholder="Thêm một đánh dấu ...">
+                        </li>
                     </ul>
                 </div>
 
@@ -438,18 +447,6 @@
     </div>
 
     <script src="/js/update_Lead.js">
-    </script>
-    <script>
-        const fileInput = document.getElementById('up_file-item');
-        const fileNameDisplay = document.getElementById('file-name-display');
-
-        fileInput.addEventListener('change', function () {
-            if (this.files && this.files.length > 0) {
-                fileNameDisplay.textContent = this.files[0].name;
-            } else {
-                fileNameDisplay.textContent = '';
-            }
-        });
     </script>
 </body>
 

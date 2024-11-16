@@ -9,9 +9,10 @@ import multer from 'multer';
 import path from 'path';
 var appRoot = require('app-root-path');
 
+//multer setup
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, appRoot + "/src/public/image/");
+        cb(null, appRoot + "/src/public/upload/");
     },
 
     // By default, multer removes file extensions so let's add them back
@@ -20,20 +21,12 @@ const storage = multer.diskStorage({
     }
 });
 
-const imageFilter = function (req, file, cb) {
-    // Accept images only
-    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
-        req.fileValidationError = 'Only image files are allowed!';
-        return cb(new Error('Only image files are allowed!'), false);
-    }
-    cb(null, true);
-};
+// let upload = multer({ storage: storage, fileFilter: imageFilter });
+let upload = multer({ storage: storage });
 
-let upload = multer({ storage: storage, fileFilter: imageFilter });
 
-/*
-init passport routes
- */
+//init passport routes
+
 initPassportLocal();
 
 let router = express.Router();
@@ -55,8 +48,12 @@ let initWebRoutes = (app) => {
     router.get('/delete-lead/:userId', homePageController.deleteLead);
     //update lead
     router.get('/edit-lead/:id', homePageController.getEditPage);
-    router.post('/update-lead', upload.single('profile_image'), homePageController.postUpdateLead);
-    // Bulk Delete Leads
+    // router.post('/update-lead', upload.single('profile_image'), homePageController.postUpdateLead);
+    router.post('/update-lead', upload.fields([
+        { name: 'profile_image', maxCount: 1 },
+        { name: 'attachments', maxCount: 10 }
+    ]), homePageController.postUpdateLead);
+    // bulk delete leads
     router.post('/delete-leads', homePageController.bulkDeleteLeads);
     //test interface
     router.get("/add-lead", loginController.checkLoggedIn, (req, res) => {
