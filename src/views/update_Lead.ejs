@@ -52,7 +52,26 @@
                         <li class="header__second-item">|</i></li>
                         <li class="header__second-item help"><a href="#">Trợ Giúp <i
                                     class="fas fa-chevron-down"></i></a></li>
-                        <li class="header__second-item"><i class="fas fa-user-circle"></i></li>
+                        <form action="/logout" method="post" style="display: inline;" id="logoutForm">
+                            <li class="header__second-item"><label for="logout" class="fas fa-user-circle"></label>
+                                <input type="checkbox" name="" class="ohyes" id="logout" hidden>
+                                <label for="logout" class="overlay1"></label>
+                                <ul class="logout">
+                                    <!-- <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li> 
+                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li> -->
+                                    <li>
+                                        <a href="#"
+                                            onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -111,17 +130,25 @@
                         <li class="file__title">Được giao cho</li>
                         <li class="file__link"><a href="">+</a></li>
                         <li class="file__title">File đính kèm</li>
-                        <li class="up__file-item">
-                            <label for="up_file-item"> <span>Tập tin đính kèm</span> <span>+</span></label>
-                            <input type="file" name="" id="up_file-item" hidden>
-                        </li>
-                        <li class="file__title">Nhận xét</li>
-                        <li class="file__link"><a href="">+</a></li>
-                        <li class="file__title">Với chia sẻ</li>
-                        <li class="file__link"><a href="">+</a></li>
-                        <li class="file__title">Nhãn</li>
-                        <li class="file_input"><input type="text" name="" id="" placeholder="Thêm một đánh dấu ...">
-                        </li>
+                        <% if(dataUser.attachment) { %>
+                            <ul id="file-name-display">
+                                <%=dataUser.attachment%>
+                            </ul>
+                            <% } else {%>
+                                <ul id="file-name-display"></ul>
+                                <% } %>
+                                    <li class="up__file-item">
+                                        <label for="up_file-item"> <span>Tập tin đính kèm</span> <span>+</span></label>
+                                        <input type="file" name="" id="up_file-item" hidden multiple>
+                                    </li>
+                                    <li class="file__title">Nhận xét</li>
+                                    <li class="file__link"><a href="">+</a></li>
+                                    <li class="file__title">Với chia sẻ</li>
+                                    <li class="file__link"><a href="">+</a></li>
+                                    <li class="file__title">Nhãn</li>
+                                    <li class="file_input"><input type="text" name="" id=""
+                                            placeholder="Thêm một đánh dấu ...">
+                                    </li>
                     </ul>
                 </div>
 
@@ -411,6 +438,18 @@
     </div>
 
     <script src="/js/update_Lead.js">
+    </script>
+    <script>
+        const fileInput = document.getElementById('up_file-item');
+        const fileNameDisplay = document.getElementById('file-name-display');
+
+        fileInput.addEventListener('change', function () {
+            if (this.files && this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        });
     </script>
 </body>
 

@@ -27,6 +27,7 @@ header {
 .header__first {
     width: 85%;
     height: 100%;
+    background-color:#fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -657,4 +658,17 @@ nav {
 .breadcrumb-item:not(.active)::after {
     content: ">";
     margin-left: 8px;
+}
+
+#file-name-display {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
+
+.sidebar{
+    width:215px;
+    
 }

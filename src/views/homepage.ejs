@@ -43,7 +43,7 @@
                         <li class="header__second-item">|</i></li>
                         <li class="header__second-item help"><a href="#">Trợ Giúp <i
                                     class="fas fa-chevron-down"></i></a></li>
-                        <form action="/logout" method="post">
+                        <form action="/logout" method="post" style="display: inline;" id="logoutForm">
                             <li class="header__second-item"><label for="logout" class="fas fa-user-circle"></label>
                                 <input type="checkbox" name="" class="ohyes" id="logout" hidden>
                                 <label for="logout" class="overlay1"></label>
@@ -53,10 +53,13 @@
                                     <li><a href="#">Demo</a></li>
                                     <li><a href="#">Demo</a></li>
                                     <li><a href="#">Demo</a></li>
-                                    <li><a href="#">Demo</a></li>
+                                    <li><a href="#">Demo</a></li> 
                                     <li><a href="#">Demo</a></li>
                                     <li><a href="#">Demo</a></li> -->
-                                    <li><a href="#">Logout</a></li>
+                                    <li>
+                                        <a href="#"
+                                            onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                                    </li>
                                 </ul>
                             </li>
                         </form>

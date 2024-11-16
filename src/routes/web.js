@@ -50,7 +50,7 @@ let initWebRoutes = (app) => {
     //create lead
     router.post('/create-new-lead', addLeadController.createNewLead);
     //show all leads
-    router.get('/lead', homePageController.showLeads)
+    router.get('/lead', loginController.checkLoggedIn, homePageController.showLeads)
     //delete lead
     router.get('/delete-lead/:userId', homePageController.deleteLead);
     //update lead
@@ -59,13 +59,10 @@ let initWebRoutes = (app) => {
     // Bulk Delete Leads
     router.post('/delete-leads', homePageController.bulkDeleteLeads);
     //test interface
-    router.get("/home", (req, res) => {
-        return res.render("home.ejs")
-    });
-    router.get("/add-lead", (req, res) => {
+    router.get("/add-lead", loginController.checkLoggedIn, (req, res) => {
         return res.render("add_Lead.ejs")
     });
-    router.get("/crm", (req, res) => {
+    router.get("/crm", loginController.checkLoggedIn, (req, res) => {
         return res.render("crm.ejs")
     });
 
