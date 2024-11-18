@@ -48,7 +48,9 @@ CREATE TABLE `crm-lead`.`leads` (
     `profile_image` VARCHAR(100),
     `attachment` VARCHAR(255),
     `created_by` VARCHAR(100),
-    `assigned_for` VARCHAR(100)
+    `assigned_for` VARCHAR(100),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE INDEX `idx_name` ON `crm-lead`.`leads`(name);
@@ -72,6 +74,5 @@ CREATE TABLE `crm-lead`.`attachments` (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
 );
-ALTER TABLE `crm-lead`.`leads` 
-ADD COLUMN `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 

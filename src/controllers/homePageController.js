@@ -44,8 +44,25 @@ let showLeads = async (req, res) => {
         query += ' WHERE ' + conditions.join(' AND ');
     }
 
-    // Append ORDER BY clause if needed
-    query += ' ORDER BY updated_at DESC';
+    // // Append ORDER BY clause if needed
+    // query += ' ORDER BY updated_at DESC';
+
+    // Handle sorting
+    let sortField = req.query.sortField || 'updated_at';
+    let sortOrder = req.query.sortOrder || 'DESC';
+
+    // Sanitize inputs to prevent SQL injection
+    const allowedFields = ['updated_at', 'name', 'created_at', 'code', 'status', 'organization', 'owner', 'status', 'next_at', 'end_at'];
+    const allowedOrders = ['ASC', 'DESC'];
+    if (!allowedFields.includes(sortField)) {
+        sortField = 'updated_at';
+    }
+    if (!allowedOrders.includes(sortOrder)) {
+        sortOrder = 'DESC';
+    }
+
+    query += ` ORDER BY ${sortField} ${sortOrder}`;
+
     // Execute the query
     const [rows] = await pool.execute(query, params);
     // Fetch user emails

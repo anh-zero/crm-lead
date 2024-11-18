@@ -57,7 +57,7 @@ let initWebRoutes = (app) => {
     router.post('/delete-leads', homePageController.bulkDeleteLeads);
     //test interface
     router.get("/add-lead", loginController.checkLoggedIn, (req, res) => {
-        return res.render("add_Lead.ejs")
+        return res.render("add_Lead.ejs", { userEmail: req.user.email })
     });
     router.get("/crm", loginController.checkLoggedIn, (req, res) => {
         return res.render("crm.ejs")

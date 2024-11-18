@@ -204,7 +204,7 @@
 
                         <!-- header -->
                         <div class="content-header">
-                            <!-- <form action="/lead" method="GET"> -->
+
                             <div class="content-header__first">
                                 <div class="header-name">
                                     <input type="text" name="name" placeholder="Tên" value="<%= query.name || '' %>"
@@ -242,7 +242,7 @@
                             </div>
 
 
-                            <div class="content-header__second">
+                            <!-- <div class="content-header__second">
                                 <div class="header_filter">
                                     <button type="submit"><i class="fas fa-filter"></i> Bộ lọc</button>
                                 </div>
@@ -252,8 +252,45 @@
                                             class="fas fa-sort-amount-down"></i></button>
                                     <button class="header_btn_filter" type="submit">Sửa lần cuối vào</button>
                                 </div>
+                            </div> -->
+                            <div class="header__Down_up">
+                                <!-- Sorting Direction Button -->
+                                <button class="header_btn_down-up" type="submit" name="sortOrder"
+                                    value="<%= query.sortOrder === 'ASC' ? 'DESC' : 'ASC' %>">
+                                    <% if (query.sortOrder==='ASC' ) { %>
+                                        <i class="fas fa-sort-amount-up"></i>
+                                        <% } else { %>
+                                            <i class="fas fa-sort-amount-down"></i>
+                                            <% } %>
+                                </button>
+
+                                <!-- Sorting Field Selector -->
+                                <select class="header_btn_filter" name="sortField" onchange="this.form.submit()">
+                                    <option value="updated_at" <%=query.sortField==='updated_at' ? 'selected' : '' %>
+                                        >Sửa lần cuối vào</option>
+                                    <option value="name" <%=query.sortField==='name' ? 'selected' : '' %>>Tên</option>
+                                    <option value="created_at" <%=query.sortField==='created_at' ? 'selected' : '' %>>
+                                        Ngày tạo
+                                    </option>
+                                    <option value="code" <%=query.sortField==='code' ? 'selected' : '' %>>Mã số</option>
+                                    <option value="organization" <%=query.sortField==='organization' ? 'selected' : ''
+                                        %>>Tên tổ chức
+                                    </option>
+                                    <option value="owner" <%=query.sortField==='owner' ? 'selected' : '' %>>Người sở hữu
+                                        tiềm năng
+                                    </option>
+                                    <option value="status" <%=query.sortField==='status' ? 'selected' : '' %>>Trạng thái
+                                    </option>
+                                    <option value="next_at" <%=query.sortField==='next_at' ? 'selected' : '' %>>Ngày
+                                        liên hệ tiếp theo
+                                    </option>
+                                    <option value="end_at" <%=query.sortField==='end_at' ? 'selected' : '' %>>Kết thúc
+                                        vào
+                                    </option>
+                                    <!-- Add other fields as needed -->
+                                </select>
                             </div>
-                            <!-- </form> -->
+
                         </div>
                         <div class="content-all">
                             <table class="datatable">
