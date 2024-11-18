@@ -97,6 +97,113 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize endAtInput.min on page load
     updateEndAtMin();
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const tagInput = document.getElementById('tagInput');
+    const tagSuggestions = document.getElementById('tagSuggestions');
+
+    // Fetch existing tags
+    fetch('/get-tags')
+        .then(response => response.json())
+        .then(tags => {
+            // Show all tags when clicking the input field
+            tagInput.addEventListener('focus', function () {
+                tagSuggestions.innerHTML = tags
+                    .map(tag => `<div class="tag-suggestion" onclick="selectTag('${tag}')">${tag}</div>`)
+                    .join('');
+                tagSuggestions.style.display = 'block';
+            });
+
+            // Filter tags while typing
+            tagInput.addEventListener('input', function () {
+                const value = this.value.toLowerCase();
+                const filteredTags = tags.filter(tag =>
+                    tag.toLowerCase().includes(value)
+                );
+
+                tagSuggestions.innerHTML = filteredTags
+                    .map(tag => `<div class="tag-suggestion" onclick="selectTag('${tag}')">${tag}</div>`)
+                    .join('');
+
+                tagSuggestions.style.display = filteredTags.length > 0 ? 'block' : 'none';
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!tagInput.contains(e.target) && !tagSuggestions.contains(e.target)) {
+                    tagSuggestions.style.display = 'none';
+                }
+            });
+        });
+
+    // Handle enter key press
+    tagInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addTag();
+        }
+    });
+});
+
+function selectTag(tag) {
+    document.getElementById('tagInput').value = tag;
+    document.getElementById('tagSuggestions').style.display = 'none';
+    addTag();
+}
+
+function addTag() {
+    const tagName = document.getElementById('tagInput').value;
+    const leadId = document.querySelector('input[name="id"]').value;
+
+    if (tagName && tagName.trim() !== '') {
+        fetch('/add-tag-to-leads', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ids: [leadId],
+                tag_name: tagName.trim()
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Đã xảy ra lỗi khi thêm thẻ.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi khi thêm thẻ.');
+            });
+    }
+}
+
+function removeTag(tagName, leadId) {
+    if (confirm('Bạn có chắc muốn xóa thẻ này?')) {
+        fetch('/remove-tag', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                lead_id: leadId,
+                tag_name: tagName
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Đã xảy ra lỗi khi xóa thẻ.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi khi xóa thẻ.');
+            });
+    }
+}
 
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');

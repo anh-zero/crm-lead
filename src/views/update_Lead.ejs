@@ -166,8 +166,23 @@
                         <li class="file__title">Với chia sẻ</li>
                         <li class="file__link"><a href="">+</a></li> -->
                         <li class="file__title">Nhãn</li>
-
-                        <li class="file_input"><input type="text" name="" id="" placeholder="Thêm một đánh dấu ...">
+                        <div class="lead-tags">
+                            <% if (leadTags && leadTags.length> 0) { %>
+                                <% leadTags.forEach(function(tagObj) { %>
+                                    <span class="tag-badge">
+                                        <%= tagObj.name %>
+                                            <span class="tag-remove"
+                                                onclick="removeTag('<%= tagObj.name %>', <%= dataUser.id %>)">×</span>
+                                    </span>
+                                    <% }); %>
+                                        <% } %>
+                        </div>
+                        <li class="file_input">
+                            <div class="tag-input-container">
+                                <input type="text" id="tagInput" placeholder="Thêm một đánh dấu ..." autocomplete="off">
+                                <div id="tagSuggestions" class="tag-suggestions"></div>
+                            </div>
+                        </li>
                         </li>
                     </ul>
                 </div>

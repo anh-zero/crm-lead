@@ -39,7 +39,7 @@ header {
     align-items: center;
 }
 
-#breadcrumb-item-CRM{
+#breadcrumb-item-CRM {
     margin-left: 5px;
 }
 
@@ -700,10 +700,69 @@ nav {
     width: 215px;
 }
 
-.help>a{
+.help>a {
     color: black;
 }
 
-#existing-files-display{
+#existing-files-display {
     max-width: 170px;
+}
+
+.tag-input-container {
+    position: relative;
+    width: 100%;
+}
+
+#tagInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.tag-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+}
+
+.tag-suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.tag-suggestion:hover {
+    background-color: #f0f0f0;
+}
+
+.lead-tags {
+    margin: 10px 0;
+}
+
+.tag-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 2px;
+    background-color: #e9ecef;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #495057;
+}
+
+.tag-remove {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tag-remove:hover {
+    color: #dc3545;
 }

@@ -64,6 +64,7 @@ let initWebRoutes = (app) => {
     });
     router.post('/add-tag-to-leads', loginController.checkLoggedIn, homePageController.addTagToLeads);
     router.get('/get-tags', loginController.checkLoggedIn, homePageController.getTags);
+    router.post('/remove-tag', loginController.checkLoggedIn, homePageController.removeTag);
     return app.use("/", router);
 };
 

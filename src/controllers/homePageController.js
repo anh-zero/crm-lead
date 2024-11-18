@@ -103,6 +103,12 @@ let getEditPage = async (req, res) => {
     );
     let [userRows] = await pool.execute('SELECT email FROM users');
     let userEmails = userRows.map(row => row.email);
+    let [tags] = await pool.execute(`
+        SELECT t.name 
+        FROM tags t 
+        JOIN lead_tags lt ON t.id = lt.tag_id 
+        WHERE lt.lead_id = ?
+    `, [id]);
     // Format dates to YYYY-MM-DD
     if (dataUser.next_at) {
         const nextAtDate = new Date(dataUser.next_at);
@@ -131,7 +137,8 @@ let getEditPage = async (req, res) => {
     res.render('update_Lead.ejs', {
         dataUser: dataUser,
         attachments: attachmentRows,
-        userEmails: userEmails
+        userEmails: userEmails,
+        leadTags: tags
     });
 }
 
@@ -279,6 +286,28 @@ let getTags = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+let removeTag = async (req, res) => {
+    try {
+        const { lead_id, tag_name } = req.body;
+
+        // Get tag ID
+        let [tagRows] = await pool.execute('SELECT id FROM tags WHERE name = ?', [tag_name]);
+        if (tagRows.length === 0) {
+            return res.status(404).send('Tag not found');
+        }
+
+        // Remove the tag association
+        await pool.execute(
+            'DELETE FROM lead_tags WHERE lead_id = ? AND tag_id = ?',
+            [lead_id, tagRows[0].id]
+        );
+
+        res.status(200).send('Tag removed successfully');
+    } catch (error) {
+        console.error('Error removing tag:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 module.exports = {
     getHomePage: getHomePage,
     showLeads: showLeads,
@@ -287,5 +316,6 @@ module.exports = {
     postUpdateLead: postUpdateLead,
     bulkDeleteLeads: bulkDeleteLeads,
     addTagToLeads: addTagToLeads,
-    getTags: getTags
+    getTags: getTags,
+    removeTag: removeTag
 };
