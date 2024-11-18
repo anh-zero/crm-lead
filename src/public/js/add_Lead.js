@@ -51,6 +51,20 @@ document.addEventListener('DOMContentLoaded', function () {
         `new-lead ${visitCount}`;
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date().toISOString().split('T')[0];
+    const nextAtInput = document.querySelector('input[name="next_at"]');
+    const endAtInput = document.querySelector('input[name="end_at"]');
+
+    // Set the minimum date for next_at to today
+    nextAtInput.min = today;
+
+    // Update the minimum date for end_at whenever next_at changes
+    nextAtInput.addEventListener('change', function () {
+        endAtInput.min = nextAtInput.value;
+    });
+});
+
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

@@ -265,6 +265,8 @@
                                         <th>Người sở hữu tiềm năng</th>
                                         <th>Trạng thái</th>
                                         <th>Mã số</th>
+                                        <th>Được giao cho</th>
+                                        <th>Sửa lần cuối vào</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -344,6 +346,13 @@
                                                 </td>
                                                 <td>
                                                     <%=dataUser[i].code %>
+                                                </td>
+                                                <td>
+                                                    <%= dataUser[i].assigned_for %>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(dataUser[i].updated_at).toLocaleString('vi-VN', {
+                                                        timeZone: 'Asia/Ho_Chi_Minh' }) %>
                                                 </td>
                                             </tr>
                                             <% } %>

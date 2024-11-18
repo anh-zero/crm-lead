@@ -76,6 +76,28 @@ fileInput.addEventListener('change', function () {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date().toISOString().split('T')[0];
+    const nextAtInput = document.querySelector('input[name="next_at"]');
+    const endAtInput = document.querySelector('input[name="end_at"]');
+
+    // Set the minimum date for next_at to today
+    nextAtInput.min = today;
+
+    // Set the minimum date for end_at based on next_at
+    function updateEndAtMin() {
+        endAtInput.min = nextAtInput.value || today;
+        if (endAtInput.value && endAtInput.value < endAtInput.min) {
+            endAtInput.value = endAtInput.min;
+        }
+    }
+
+    // Update endAtInput.min when nextAtInput changes
+    nextAtInput.addEventListener('change', updateEndAtMin);
+
+    // Initialize endAtInput.min on page load
+    updateEndAtMin();
+});
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

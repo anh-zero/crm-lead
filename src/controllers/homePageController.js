@@ -44,6 +44,8 @@ let showLeads = async (req, res) => {
         query += ' WHERE ' + conditions.join(' AND ');
     }
 
+    // Append ORDER BY clause if needed
+    query += ' ORDER BY updated_at DESC';
     // Execute the query
     const [rows] = await pool.execute(query, params);
     // Fetch user emails
@@ -74,15 +76,26 @@ let getEditPage = async (req, res) => {
     let [userRows] = await pool.execute('SELECT email FROM users');
     let userEmails = userRows.map(row => row.email);
 
-    // Format dates to YYYY-MM-DD
     if (dataUser.next_at) {
-        dataUser.next_at = new Date(dataUser.next_at).toISOString().split('T')[0];
+        const nextAtDate = new Date(dataUser.next_at);
+        dataUser.next_at =
+            nextAtDate.getFullYear() +
+            '-' +
+            String(nextAtDate.getMonth() + 1).padStart(2, '0') +
+            '-' +
+            String(nextAtDate.getDate()).padStart(2, '0');
     } else {
         dataUser.next_at = '';
     }
 
     if (dataUser.end_at) {
-        dataUser.end_at = new Date(dataUser.end_at).toISOString().split('T')[0];
+        const endAtDate = new Date(dataUser.end_at);
+        dataUser.end_at =
+            endAtDate.getFullYear() +
+            '-' +
+            String(endAtDate.getMonth() + 1).padStart(2, '0') +
+            '-' +
+            String(endAtDate.getDate()).padStart(2, '0');
     } else {
         dataUser.end_at = '';
     }
