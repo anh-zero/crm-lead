@@ -75,6 +75,7 @@ fileInput.addEventListener('change', function () {
     }
 });
 
+
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

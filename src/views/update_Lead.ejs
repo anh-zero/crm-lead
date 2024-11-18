@@ -128,7 +128,17 @@
                     </div>
                     <ul class="up__file">
                         <li class="file__title">Được giao cho</li>
-                        <li class="file__link"><a href="">+</a></li>
+                        <li class="file__link">
+                            <select name="assigned_for" class="assignee-select" id="assigned_for">
+                                <option value="" <%=!dataUser.assigned_for ? 'selected' : '' %>>Select an user
+                                </option>
+                                <% userEmails.forEach(function(email) { %>
+                                    <option value="<%= email %>" <%=dataUser.assigned_for===email ? 'selected' : '' %>>
+                                        <%= email %>
+                                    </option>
+                                    <% }); %>
+                            </select>
+                        </li>
                         <li class="file__title">File đính kèm</li>
                         <div id="existing-files">
                             <% if (attachments && attachments.length> 0) { %>

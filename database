@@ -47,6 +47,7 @@ CREATE TABLE `crm-lead`.`leads` (
     `followed_blog` BOOLEAN DEFAULT FALSE,
     `profile_image` VARCHAR(100),
     `attachment` VARCHAR(255),
+    `created_by` VARCHAR(100),
     `assigned_for` VARCHAR(100)
 );
 

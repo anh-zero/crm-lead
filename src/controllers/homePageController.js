@@ -6,8 +6,9 @@ let getHomePage = (req, res) => {
     })
 };
 let showLeads = async (req, res) => {
+    let userEmail = req.user.email;
     // Extract filters from the query parameters
-    let { name, status, code } = req.query;
+    let { name, status, code, created_by, assigned_for } = req.query;
 
     // Initialize the base query and parameters array
     let query = 'SELECT * FROM leads';
@@ -29,6 +30,14 @@ let showLeads = async (req, res) => {
         conditions.push('code LIKE ?');
         params.push(`%${code}%`);
     }
+    if (created_by && created_by.trim() !== '') {
+        conditions.push('created_by = ?');
+        params.push(created_by);
+    }
+    if (assigned_for && assigned_for.trim() !== '') {
+        conditions.push('assigned_for = ?');
+        params.push(assigned_for);
+    }
 
     // Append WHERE clause if there are any conditions
     if (conditions.length > 0) {
@@ -37,11 +46,16 @@ let showLeads = async (req, res) => {
 
     // Execute the query
     const [rows] = await pool.execute(query, params);
+    // Fetch user emails
+    let [userRows] = await pool.execute('SELECT email FROM users');
+    let userEmails = userRows.map(row => row.email);
 
     // Render the template with data and query parameters
     res.render('lead.ejs', {
         dataUser: rows,
-        query: req.query
+        query: req.query,
+        userEmails: userEmails,
+        userEmail: userEmail
     });
 };
 let deleteLead = async (req, res) => {
@@ -57,6 +71,9 @@ let getEditPage = async (req, res) => {
         'SELECT * FROM attachments WHERE lead_id = ?',
         [id]
     );
+    let [userRows] = await pool.execute('SELECT email FROM users');
+    let userEmails = userRows.map(row => row.email);
+
     // Format dates to YYYY-MM-DD
     if (dataUser.next_at) {
         dataUser.next_at = new Date(dataUser.next_at).toISOString().split('T')[0];
@@ -73,6 +90,7 @@ let getEditPage = async (req, res) => {
     res.render('update_Lead.ejs', {
         dataUser: dataUser,
         attachments: attachmentRows,
+        userEmails: userEmails
     });
 }
 
@@ -86,7 +104,7 @@ let postUpdateLead = async (req, res) => {
             city, district, state_province, country, postal_code, forward,
             mobile_phone, fax, website, lead_type, market_segment, industry,
             request_type, company, nation, print_language, unsubscribe,
-            followed_blog, id
+            followed_blog, assigned_for, id
         } = req.body;
 
         // Convert checkbox values to integers
@@ -114,7 +132,7 @@ let postUpdateLead = async (req, res) => {
                 city = ?, district = ?, state_province = ?, country = ?, postal_code = ?,
                 forward = ?, mobile_phone = ?, fax = ?, website = ?, lead_type = ?,
                 market_segment = ?, industry = ?, request_type = ?, company = ?, nation = ?,
-                print_language = ?, unsubscribe = ?, followed_blog = ?
+                print_language = ?, unsubscribe = ?, followed_blog = ?, assigned_for = ?
                 ${profile_image ? ', profile_image = ?' : ''}
             WHERE id = ?`;
 
@@ -126,7 +144,7 @@ let postUpdateLead = async (req, res) => {
             city, district, state_province, country, postal_code, forward,
             mobile_phone, fax, website, lead_type, market_segment, industry,
             request_type, company, nation, print_language, unsubscribe,
-            followed_blog
+            followed_blog, assigned_for
         ];
 
         if (profile_image) {
