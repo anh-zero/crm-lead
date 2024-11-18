@@ -144,10 +144,12 @@
                             <% if (attachments && attachments.length> 0) { %>
                                 <ul id="existing-files-display">
                                     <% attachments.forEach(function(file) { %>
-                                        <li>
+                                        <li class="attachment-item">
                                             <a href="/upload/<%= file.filename %>" target="_blank">
                                                 <%= file.original_name %>
                                             </a>
+                                            <span class="attachment-remove"
+                                                onclick="removeAttachment('<%= file.id %>')">×</span>
                                         </li>
                                         <% }); %>
                                 </ul>

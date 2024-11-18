@@ -308,6 +308,42 @@ let removeTag = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+let removeAttachment = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        // Get attachment info first
+        const [attachment] = await pool.execute(
+            'SELECT filename FROM attachments WHERE id = ?',
+            [id]
+        );
+
+        if (attachment && attachment[0]) {
+            // Delete the file from the filesystem
+            const fs = require('fs');
+            const path = require('path');
+            const filePath = path.join(__dirname, '../public/upload/', attachment[0].filename);
+
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath);
+            }
+
+            // Delete the record from database
+            await pool.execute(
+                'DELETE FROM attachments WHERE id = ?',
+                [id]
+            );
+
+            res.status(200).send('Attachment removed successfully');
+        } else {
+            res.status(404).send('Attachment not found');
+        }
+    } catch (error) {
+        console.error('Error removing attachment:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     getHomePage: getHomePage,
     showLeads: showLeads,
@@ -317,5 +353,6 @@ module.exports = {
     bulkDeleteLeads: bulkDeleteLeads,
     addTagToLeads: addTagToLeads,
     getTags: getTags,
-    removeTag: removeTag
+    removeTag: removeTag,
+    removeAttachment: removeAttachment
 };

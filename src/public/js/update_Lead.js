@@ -204,6 +204,28 @@ function removeTag(tagName, leadId) {
             });
     }
 }
+function removeAttachment(attachmentId) {
+    if (confirm('Bạn có chắc muốn xóa tệp đính kèm này?')) {
+        fetch('/remove-attachment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: attachmentId })
+        })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Đã xảy ra lỗi khi xóa tệp đính kèm.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi khi xóa tệp đính kèm.');
+            });
+    }
+}
 
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');

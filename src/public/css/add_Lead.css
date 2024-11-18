@@ -766,3 +766,37 @@ nav {
 .tag-remove:hover {
     color: #dc3545;
 }
+
+.attachment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    gap: 8px;
+    /* Add space between filename and remove button */
+}
+
+.attachment-item a {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    /* Allows flex item to shrink below content size */
+}
+
+.attachment-remove {
+    flex-shrink: 0;
+    /* Prevent the × from shrinking */
+    color: #dc3545;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+.attachment-remove:hover {
+    color: #bd2130;
+}
