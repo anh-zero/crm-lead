@@ -916,3 +916,26 @@ nav {
     background-color: #6c757d;
     color: white;
 }
+
+.reset {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.reset:hover {
+    background-color: #f0f0f0;
+}
+
+.reset:active {
+    transform: rotate(180deg);
+}
+
+.reset:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}

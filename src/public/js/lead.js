@@ -262,6 +262,18 @@ document.addEventListener('DOMContentLoaded', function () {
         element.textContent = timeString;
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const refreshButton = document.getElementById('refreshButton');
+
+    refreshButton.addEventListener('click', function () {
+        // Show loading spinner on the button
+        refreshButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        refreshButton.disabled = true;
+
+        // Reload the current page
+        window.location.reload();
+    });
+});
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');
