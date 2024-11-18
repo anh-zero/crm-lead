@@ -122,7 +122,7 @@
                                             <% }); %>
                                     </select>
                                 </li>
-                                <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li>
+                                <!-- <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li> -->
                                 <li class="sidebar__list-item"><a href="#">Nhãn <i
                                             class="fa-solid fa-chevron-down"></i></a>
                                 </li>
@@ -162,6 +162,7 @@
                                 <!-- Other actions if any -->
                                 <li><a href="#" onclick="editSelectedLead(); return false;">Sửa</a></li>
                                 <li><a href="#" onclick="deleteSelectedLeads(); return false;">Xóa</a></li>
+                                <li><a href="#" onclick="addTagToSelectedLeads(); return false;">Thêm nhãn</a></li>
                                 <!-- Other actions if any -->
                             </ul>
                         </div>
@@ -200,20 +201,34 @@
                                         <% }); %>
                                 </select>
                             </li>
-                            <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li>
-                            <li class="sidebar__list-item"><a href="#">Nhãn <i class="fa-solid fa-chevron-down"></i></a>
+                            <!-- <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li> -->
+                            <li class="sidebar__list-item">
+                                <label for="tag">Nhãn</label><br>
+                                <select name="tag" onchange="this.form.submit()">
+                                    <option value="">Tất cả</option>
+                                    <% tags.forEach(function(tag) { %>
+                                        <option value="<%= tag %>" <%=query.tag===tag ? 'selected' : '' %>>
+                                            <%= tag %>
+                                        </option>
+                                        <% }); %>
+                                </select>
                             </li>
-                            <li class="sidebar__title-link"><a href="#">Hiện nhãn</a></li>
+                            <li class="sidebar__list-item">
+                                <a href="#">Nhãn<i class="fa-solid fa-chevron-down"></i></a>
+                            </li>
+                            <li class="sidebar__title-link">
+                                <a href="#" onclick="toggleTagColumn(); return false;">Hiện nhãn</a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="sidebar__second">
-                        <ul class="sidebar__list">
+                        <!-- <ul class="sidebar__list">
                             <li>
                             <li class="sidebar__title">Lưu bộ lọc</li>
                             <li><input class="sidebar__input" type="text" name="" id="" placeholder="Tên bộ lọc"></li>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
 
@@ -314,6 +329,7 @@
                                     <tr>
                                         <th><input id="check_all" type="checkbox"></th>
                                         <th>Tên</th>
+                                        <th class="tag-column" style="display: none;">Nhãn</th>
                                         <th>Tên tổ chức</th>
                                         <th>Người sở hữu tiềm năng</th>
                                         <th>Trạng thái</th>
@@ -332,6 +348,15 @@
                                                     <div class="title_data">
                                                         <%=dataUser[i].name %>
                                                     </div>
+                                                </td>
+                                                <td class="tag-column" style="display: none;">
+                                                    <% if (dataUser[i].tags) { %>
+                                                        <% dataUser[i].tags.split(',').forEach(function(tag) { %>
+                                                            <span class="tag-badge">
+                                                                <%= tag %>
+                                                            </span>
+                                                            <% }); %>
+                                                                <% } %>
                                                 </td>
                                                 <td>
                                                     <%=dataUser[i].organization %>
@@ -406,8 +431,9 @@
                                                     <%= dataUser[i].assigned_for %>
                                                 </td>
                                                 <td>
-                                                    <%= new Date(dataUser[i].updated_at).toLocaleString('vi-VN', {
-                                                        timeZone: 'Asia/Ho_Chi_Minh' }) %>
+                                                    <span class="relative-time"
+                                                        data-updated-at="<%= dataUser[i].updated_at %>"
+                                                        title="<%= new Date(dataUser[i].updated_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) %>"></span>
                                                 </td>
                                             </tr>
                                             <% } %>

@@ -8,10 +8,16 @@ let getHomePage = (req, res) => {
 let showLeads = async (req, res) => {
     let userEmail = req.user.email;
     // Extract filters from the query parameters
-    let { name, status, code, created_by, assigned_for } = req.query;
+    let { name, status, code, created_by, assigned_for, tag } = req.query;
 
     // Initialize the base query and parameters array
-    let query = 'SELECT * FROM leads';
+    let query = `
+        SELECT DISTINCT l.*, 
+        GROUP_CONCAT(t.name) as tags
+        FROM leads l
+        LEFT JOIN lead_tags lt ON l.id = lt.lead_id 
+        LEFT JOIN tags t ON lt.tag_id = t.id
+    `;
     let params = [];
     let conditions = [];
 
@@ -38,6 +44,10 @@ let showLeads = async (req, res) => {
         conditions.push('assigned_for = ?');
         params.push(assigned_for);
     }
+    if (tag && tag.trim() !== '') {
+        conditions.push('t.name = ?');
+        params.push(tag);
+    }
 
     // Append WHERE clause if there are any conditions
     if (conditions.length > 0) {
@@ -45,9 +55,9 @@ let showLeads = async (req, res) => {
     }
     // // Append ORDER BY clause if needed
     // query += ' ORDER BY updated_at DESC';
-
+    query += ' GROUP BY l.id';
     // Handle sorting
-    let sortField = req.query.sortField || 'updated_at';
+    let sortField = req.query.sortField || 'l.updated_at';
     let sortOrder = req.query.sortOrder || 'DESC';
 
     // Sanitize inputs to prevent SQL injection
@@ -67,13 +77,15 @@ let showLeads = async (req, res) => {
     // Fetch user emails
     let [userRows] = await pool.execute('SELECT email FROM users');
     let userEmails = userRows.map(row => row.email);
+    let [tagRows] = await pool.execute('SELECT DISTINCT name FROM tags');
 
     // Render the template with data and query parameters
     res.render('lead.ejs', {
         dataUser: rows,
         query: req.query,
         userEmails: userEmails,
-        userEmail: userEmail
+        userEmail: userEmail,
+        tags: tagRows.map(row => row.name)
     });
 };
 let deleteLead = async (req, res) => {
@@ -220,11 +232,60 @@ let bulkDeleteLeads = async (req, res) => {
         res.status(500).send('Internal Server Error.');
     }
 };
+let addTagToLeads = async (req, res) => {
+    try {
+        const { ids, tag_name } = req.body;
+
+        // Validate inputs
+        if (!ids || !Array.isArray(ids) || ids.length === 0 || !tag_name || tag_name.trim() === '') {
+            return res.status(400).send('Invalid input data.');
+        }
+
+        // Trim the tag name
+        const trimmedTagName = tag_name.trim();
+
+        // Check if the tag already exists
+        let [tagRows] = await pool.execute('SELECT id FROM tags WHERE name = ?', [trimmedTagName]);
+        let tag_id;
+        if (tagRows.length > 0) {
+            tag_id = tagRows[0].id;
+        } else {
+            // Insert new tag into tags table
+            let [result] = await pool.execute('INSERT INTO tags (name) VALUES (?)', [trimmedTagName]);
+            tag_id = result.insertId;
+        }
+
+        // Associate the tag with each selected lead
+        const values = ids.map(lead_id => [lead_id, tag_id]);
+
+        // Insert into lead_tags table (avoid duplicate entries)
+        await pool.query(
+            'INSERT IGNORE INTO lead_tags (lead_id, tag_id) VALUES ?',
+            [values]
+        );
+
+        res.status(200).send('Tag added to selected leads successfully.');
+    } catch (error) {
+        console.error('Error adding tag to leads:', error);
+        res.status(500).send('Internal Server Error.');
+    }
+};
+let getTags = async (req, res) => {
+    try {
+        let [tagRows] = await pool.execute('SELECT DISTINCT name FROM tags');
+        res.json(tagRows.map(row => row.name));
+    } catch (error) {
+        console.error('Error fetching tags:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 module.exports = {
     getHomePage: getHomePage,
     showLeads: showLeads,
     deleteLead: deleteLead,
     getEditPage: getEditPage,
     postUpdateLead: postUpdateLead,
-    bulkDeleteLeads: bulkDeleteLeads
+    bulkDeleteLeads: bulkDeleteLeads,
+    addTagToLeads: addTagToLeads,
+    getTags: getTags
 };

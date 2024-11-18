@@ -79,6 +79,189 @@ $(function () {
 });
 
 
+// function addTagToSelectedLeads() {
+//     const ids = getSelectedLeadIds();
+//     if (ids) {
+//         const tagName = prompt('Nhập tên thẻ muốn thêm:');
+//         if (tagName && tagName.trim() !== '') {
+//             // Send a POST request to add the tag to selected leads
+//             fetch('/add-tag-to-leads', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                     // Include CSRF token if needed
+//                 },
+//                 body: JSON.stringify({ ids: ids, tag_name: tagName.trim() })
+//             })
+//                 .then(response => {
+//                     if (response.ok) {
+//                         alert('Thêm thẻ thành công.');
+//                         // Optionally, refresh the page or update the UI
+//                         location.reload();
+//                     } else {
+//                         alert('Đã xảy ra lỗi khi thêm thẻ.');
+//                     }
+//                 })
+//                 .catch(error => {
+//                     console.error('Error:', error);
+//                     alert('Đã xảy ra lỗi khi thêm thẻ.');
+//                 });
+//         } else {
+//             alert('Tên thẻ không được để trống.');
+//         }
+//     }
+// }
+
+function addTagToSelectedLeads() {
+    const ids = getSelectedLeadIds();
+    if (ids) {
+        const modalHtml = `
+            <div id="tagModal" class="modal">
+                <div class="modal-content">
+                    <h3>Thêm thẻ</h3>
+                    <div class="tag-input-container">
+                        <input type="text" id="tagInput" placeholder="Nhập tên thẻ" autocomplete="off">
+                        <div id="tagSuggestions" class="tag-suggestions"></div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button onclick="submitTag()">Thêm</button>
+                        <button onclick="closeTagModal()">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+        const tagInput = document.getElementById('tagInput');
+        const tagSuggestions = document.getElementById('tagSuggestions');
+
+        // Fetch existing tags
+        fetch('/get-tags')
+            .then(response => response.json())
+            .then(tags => {
+                // Show all tags when clicking the input field
+                tagInput.addEventListener('focus', function () {
+                    tagSuggestions.innerHTML = tags
+                        .map(tag => `<div class="tag-suggestion" onclick="selectTag('${tag}')">${tag}</div>`)
+                        .join('');
+                    tagSuggestions.style.display = 'block';
+                });
+
+                // Filter tags while typing
+                tagInput.addEventListener('input', function () {
+                    const value = this.value.toLowerCase();
+                    const filteredTags = tags.filter(tag =>
+                        tag.toLowerCase().includes(value)
+                    );
+
+                    tagSuggestions.innerHTML = filteredTags
+                        .map(tag => `<div class="tag-suggestion" onclick="selectTag('${tag}')">${tag}</div>`)
+                        .join('');
+
+                    tagSuggestions.style.display = filteredTags.length > 0 ? 'block' : 'none';
+                });
+
+                // Hide suggestions when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!tagInput.contains(e.target) && !tagSuggestions.contains(e.target)) {
+                        tagSuggestions.style.display = 'none';
+                    }
+                });
+            });
+    }
+}
+
+function selectTag(tag) {
+    document.getElementById('tagInput').value = tag;
+    document.getElementById('tagSuggestions').style.display = 'none';
+}
+
+function submitTag() {
+    const tagName = document.getElementById('tagInput').value;
+    if (tagName && tagName.trim() !== '') {
+        const ids = getSelectedLeadIds();
+        fetch('/add-tag-to-leads', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ids: ids, tag_name: tagName.trim() })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thêm thẻ thành công.');
+                    location.reload();
+                } else {
+                    alert('Đã xảy ra lỗi khi thêm thẻ.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi khi thêm thẻ.');
+            });
+        closeTagModal();
+    }
+}
+
+function closeTagModal() {
+    const modal = document.getElementById('tagModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function toggleTagColumn() {
+    const tagColumns = document.getElementsByClassName('tag-column');
+    const link = document.querySelector('.sidebar__title-link a');
+
+    Array.from(tagColumns).forEach(column => {
+        if (column.style.display === 'none') {
+            column.style.display = '';
+            link.textContent = 'Ẩn nhãn';
+        } else {
+            column.style.display = 'none';
+            link.textContent = 'Hiện nhãn';
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const relativeTimeElements = document.querySelectorAll('.relative-time');
+
+    relativeTimeElements.forEach(function (element) {
+        const updatedAt = element.getAttribute('data-updated-at');
+        const updatedDate = new Date(updatedAt);
+        const now = new Date();
+        const diff = now - updatedDate;
+
+        let timeString = '';
+
+        const seconds = Math.floor(diff / 1000);
+        const minutes = Math.floor(diff / (1000 * 60));
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+        const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+
+        if (years > 0) {
+            timeString = `${years} năm trước`;
+        } else if (months > 0) {
+            timeString = `${months} tháng trước`;
+        } else if (weeks > 0) {
+            timeString = `${weeks} tuần trước`;
+        } else if (days > 0) {
+            timeString = `${days} ngày trước`;
+        } else if (hours > 0) {
+            timeString = `${hours} giờ trước`;
+        } else if (minutes > 0) {
+            timeString = `${minutes} phút trước`;
+        } else {
+            timeString = `Vừa xong`;
+        }
+
+        element.textContent = timeString;
+    });
+});
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

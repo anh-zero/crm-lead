@@ -62,7 +62,8 @@ let initWebRoutes = (app) => {
     router.get("/crm", loginController.checkLoggedIn, (req, res) => {
         return res.render("crm.ejs")
     });
-
+    router.post('/add-tag-to-leads', loginController.checkLoggedIn, homePageController.addTagToLeads);
+    router.get('/get-tags', loginController.checkLoggedIn, homePageController.getTags);
     return app.use("/", router);
 };
 
