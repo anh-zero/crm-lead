@@ -36,8 +36,11 @@ header {
 .header__first-logo {
     flex-basis: 500px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
+}
+
+#breadcrumb-item-CRM{
+    margin-left: 5px;
 }
 
 .header__first-logo img {
@@ -68,6 +71,7 @@ header {
     border: none;
     border-radius: 0 5px 5px 0;
     margin-left: 36px;
+    background-color: #f4F4F6;
 }
 
 .header__first-form-btn {
@@ -78,7 +82,7 @@ header {
     height: 100%;
     border: none;
     border-radius: 5px 0 0 5px;
-    background-color: #fff;
+    background-color: #f4F4F6;
 }
 
 .header__first-form-input:focus {
@@ -694,4 +698,12 @@ nav {
 
 .sidebar {
     width: 215px;
+}
+
+.help>a{
+    color: black;
+}
+
+#existing-files-display{
+    max-width: 170px;
 }

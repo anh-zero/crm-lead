@@ -75,7 +75,6 @@ fileInput.addEventListener('change', function () {
     }
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const today = new Date().toISOString().split('T')[0];
     const nextAtInput = document.querySelector('input[name="next_at"]');
@@ -98,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize endAtInput.min on page load
     updateEndAtMin();
 });
+
 const sidebar = document.querySelector('.sidebar');
 const toggle_menu = document.querySelector('.toggle_menu');
 const content = document.querySelector('.content__main');

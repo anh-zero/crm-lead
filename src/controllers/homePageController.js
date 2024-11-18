@@ -43,7 +43,6 @@ let showLeads = async (req, res) => {
     if (conditions.length > 0) {
         query += ' WHERE ' + conditions.join(' AND ');
     }
-
     // // Append ORDER BY clause if needed
     // query += ' ORDER BY updated_at DESC';
 
@@ -92,7 +91,7 @@ let getEditPage = async (req, res) => {
     );
     let [userRows] = await pool.execute('SELECT email FROM users');
     let userEmails = userRows.map(row => row.email);
-
+    // Format dates to YYYY-MM-DD
     if (dataUser.next_at) {
         const nextAtDate = new Date(dataUser.next_at);
         dataUser.next_at =

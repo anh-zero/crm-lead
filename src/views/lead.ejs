@@ -23,10 +23,11 @@
                         <a class="header__first-logo-link breadcrumb-item" href="/">
                             <img src="/image/logo-black.png" alt="">
                         </a>
-                    </div>
-                    <div class="breadcrumb">
-                        <a href="/crm" class="breadcrumb-item">CRM</a>
-                        <a href="/lead" class="breadcrumb-item active">Khách hàng tiềm năng</a>
+
+                        <div class="breadcrumb">
+                            <a id="breadcrumb-item-CRM" href="/crm" class="breadcrumb-item">CRM</a>
+                            <a href="/lead" class="breadcrumb-item active">Khách hàng tiềm năng</a>
+                        </div>
                     </div>
                     <!-- header__first-input -->
                     <div class="header__first-input">
@@ -98,13 +99,33 @@
                         <div class="sidebar__first">
                             <ul class="sidebar__list">
                                 <li class="sidebar__title">Lọc theo</li>
-                                <li class="sidebar__list-item"><a href="#">Được giao cho <i
-                                            class="fa-solid fa-chevron-down"></i></a></li>
-                                <li class="sidebar__list-item"><a href="#">Được tạo bởi <i
-                                            class="fa-solid fa-chevron-down"></i></a> </li>
+                                <li class="sidebar__list-item">
+                                    <select name="assigned_for" id="assigned_for" onchange="this.form.submit()">
+                                        <option value="" <%=!query.assigned_for ? 'selected' : '' %>>Tất cả</option>
+                                        <% userEmails.forEach(function(email) { %>
+                                            <option value="<%= email %>" <%=query.assigned_for===email ? 'selected' : ''
+                                                %>>
+                                                <%= email %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </li>
+                                <li class="sidebar__list-item">
+                                    <label for="created_by">Được tạo bởi</label>
+                                    <select name="created_by" id="created_by" onchange="this.form.submit()">
+                                        <option value="" <%=!query.created_by ? 'selected' : '' %>>Tất cả</option>
+                                        <% userEmails.forEach(function(email) { %>
+                                            <option value="<%= email %>" <%=query.created_by===email ? 'selected' : ''
+                                                %>>
+                                                <%= email %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </li>
                                 <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li>
                                 <li class="sidebar__list-item"><a href="#">Nhãn <i
-                                            class="fa-solid fa-chevron-down"></i></a></li>
+                                            class="fa-solid fa-chevron-down"></i></a>
+                                </li>
                                 <li class="sidebar__title-link"><a href="#">Hiện nhãn</a></li>
                             </ul>
                         </div>
@@ -124,8 +145,8 @@
                 <!-- nav__second -->
                 <div class="nav__second">
                     <div class="nav__second-l">
-                        <button class="see-list" type="submit"><i class="fa-solid fa-list"></i> Xem Kiểu Danh Sách <i
-                                class="fa-solid fa-chevron-down"></i></button>
+                        <!-- <button class="see-list" type="submit"><i class="fa-solid fa-list"></i> Xem Kiểu Danh Sách <i
+                                class="fa-solid fa-chevron-down"></i></button> -->
                     </div>
                     <div class="nav__second-r">
                         <button class="reset" type="submit"><i class="fa-solid fa-rotate-right"></i></button>
@@ -159,7 +180,6 @@
                         <ul class="sidebar__list">
                             <li class="sidebar__title">Lọc theo</li>
                             <li class="sidebar__list-item">
-                                <label for="assigned_for">Được giao cho</label>
                                 <select name="assigned_for" id="assigned_for" onchange="this.form.submit()">
                                     <option value="" <%=!query.assigned_for ? 'selected' : '' %>>Tất cả</option>
                                     <% userEmails.forEach(function(email) { %>
@@ -204,7 +224,6 @@
 
                         <!-- header -->
                         <div class="content-header">
-
                             <div class="content-header__first">
                                 <div class="header-name">
                                     <input type="text" name="name" placeholder="Tên" value="<%= query.name || '' %>"
@@ -242,55 +261,52 @@
                             </div>
 
 
-                            <!-- <div class="content-header__second">
-                                <div class="header_filter">
-                                    <button type="submit"><i class="fas fa-filter"></i> Bộ lọc</button>
-                                </div>
-
+                            <div class="content-header__second">
                                 <div class="header__Down_up">
-                                    <button class="header_btn_down-up" type="submit"><i
-                                            class="fas fa-sort-amount-down"></i></button>
-                                    <button class="header_btn_filter" type="submit">Sửa lần cuối vào</button>
+                                    <!-- Sorting Direction Button -->
+                                    <button class="header_btn_down-up" type="submit" name="sortOrder"
+                                        value="<%= query.sortOrder === 'ASC' ? 'DESC' : 'ASC' %>">
+                                        <% if (query.sortOrder==='ASC' ) { %>
+                                            <i class="fas fa-sort-amount-up"></i>
+                                            <% } else { %>
+                                                <i class="fas fa-sort-amount-down"></i>
+                                                <% } %>
+                                    </button>
+
+                                    <!-- Sorting Field Selector -->
+                                    <select class="header_btn_filter" name="sortField" onchange="this.form.submit()">
+                                        <option value="updated_at" <%=query.sortField==='updated_at' ? 'selected' : ''
+                                            %>
+                                            >Sửa lần cuối vào</option>
+                                        <option value="name" <%=query.sortField==='name' ? 'selected' : '' %>>Tên
+                                        </option>
+                                        <option value="created_at" <%=query.sortField==='created_at' ? 'selected' : ''
+                                            %>>
+                                            Ngày tạo
+                                        </option>
+                                        <option value="code" <%=query.sortField==='code' ? 'selected' : '' %>>Mã số
+                                        </option>
+                                        <option value="organization" <%=query.sortField==='organization' ? 'selected'
+                                            : '' %>>Tên tổ chức
+                                        </option>
+                                        <option value="owner" <%=query.sortField==='owner' ? 'selected' : '' %>>Người sở
+                                            hữu
+                                            tiềm năng
+                                        </option>
+                                        <option value="status" <%=query.sortField==='status' ? 'selected' : '' %>>Trạng
+                                            thái
+                                        </option>
+                                        <option value="next_at" <%=query.sortField==='next_at' ? 'selected' : '' %>>Ngày
+                                            liên hệ tiếp theo
+                                        </option>
+                                        <option value="end_at" <%=query.sortField==='end_at' ? 'selected' : '' %>>Kết
+                                            thúc
+                                            vào
+                                        </option>
+                                        <!-- Add other fields as needed -->
+                                    </select>
                                 </div>
-                            </div> -->
-                            <div class="header__Down_up">
-                                <!-- Sorting Direction Button -->
-                                <button class="header_btn_down-up" type="submit" name="sortOrder"
-                                    value="<%= query.sortOrder === 'ASC' ? 'DESC' : 'ASC' %>">
-                                    <% if (query.sortOrder==='ASC' ) { %>
-                                        <i class="fas fa-sort-amount-up"></i>
-                                        <% } else { %>
-                                            <i class="fas fa-sort-amount-down"></i>
-                                            <% } %>
-                                </button>
-
-                                <!-- Sorting Field Selector -->
-                                <select class="header_btn_filter" name="sortField" onchange="this.form.submit()">
-                                    <option value="updated_at" <%=query.sortField==='updated_at' ? 'selected' : '' %>
-                                        >Sửa lần cuối vào</option>
-                                    <option value="name" <%=query.sortField==='name' ? 'selected' : '' %>>Tên</option>
-                                    <option value="created_at" <%=query.sortField==='created_at' ? 'selected' : '' %>>
-                                        Ngày tạo
-                                    </option>
-                                    <option value="code" <%=query.sortField==='code' ? 'selected' : '' %>>Mã số</option>
-                                    <option value="organization" <%=query.sortField==='organization' ? 'selected' : ''
-                                        %>>Tên tổ chức
-                                    </option>
-                                    <option value="owner" <%=query.sortField==='owner' ? 'selected' : '' %>>Người sở hữu
-                                        tiềm năng
-                                    </option>
-                                    <option value="status" <%=query.sortField==='status' ? 'selected' : '' %>>Trạng thái
-                                    </option>
-                                    <option value="next_at" <%=query.sortField==='next_at' ? 'selected' : '' %>>Ngày
-                                        liên hệ tiếp theo
-                                    </option>
-                                    <option value="end_at" <%=query.sortField==='end_at' ? 'selected' : '' %>>Kết thúc
-                                        vào
-                                    </option>
-                                    <!-- Add other fields as needed -->
-                                </select>
                             </div>
-
                         </div>
                         <div class="content-all">
                             <table class="datatable">
@@ -330,7 +346,7 @@
                                                                 class="data__status-content data_lead">Khách hàng tiềm
                                                                 năng</span></div>
                                                         <% } else if (dataUser[i].status==='open' ) { %>
-                                                            <div class="lead_data"><span
+                                                            <div class="lead__open-data"><span
                                                                     class="data__status-dot data_open">&#8226;</span><span
                                                                     class="data__status-content data_open">Đang
                                                                     mở</span>
@@ -366,10 +382,12 @@
                                                                                 <% } else if
                                                                                     (dataUser[i].status==='convert' ) {
                                                                                     %>
-                                                                                    <div class="lead_data"><span
+                                                                                    <div class="lead__convert-data">
+                                                                                        <span
                                                                                             class="data__status-dot data_convert">&#8226;</span><span
                                                                                             class="data__status-content data_convert">Chuyển
-                                                                                            đổi</span></div>
+                                                                                            đổi</span>
+                                                                                    </div>
                                                                                     <% } else if
                                                                                         (dataUser[i].status==='no_contact'
                                                                                         ) { %>

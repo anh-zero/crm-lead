@@ -37,9 +37,10 @@ table.datatable th {
 .lead_data{
 	display: flex;
 	height: 100%;
-	justify-content: start;
+	max-width: 80%;
 	background-color: #f4f5f6;
 	border-radius: 5px;
+	color: #333c44;
 }
 
 .data__status-dot{
@@ -50,20 +51,31 @@ table.datatable th {
 	align-items: center;
 	font-weight: 500;
 	justify-content: center;
-	color: #333c44;
 }
 
 .data__status-content{
 	font-weight: 500;
-	color: #333c44;
+}
+
+
+.lead__open-data{
+	display: flex;
+	max-width: 35%;
+	background-color: #fff5f5;
+	border-radius: 5px;
+}
+
+.lead__convert-data{
+	display: flex;
+	max-width: 40%;
+	background-color: #EAF5EE;
+	border-radius: 5px;
 }
 
 .data_open{
-	background-color: #fff5f5;
 	color: #e24c4c;
 }
 
 .data_convert{
-	background-color: #EAF5EE;
 	color: #2F9D58;
 }

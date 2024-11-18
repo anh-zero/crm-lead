@@ -26,7 +26,7 @@
                         </a>
 
                         <div class="breadcrumb">
-                            <a href="/crm" class="breadcrumb-item">CRM</a>
+                            <a id="breadcrumb-item-CRM" href="/crm" class="breadcrumb-item">CRM</a>
                             <a href="/lead" class="breadcrumb-item">Khách hàng tiềm năng</a>
                             <a class="breadcrumb-item active">
                                 <%=dataUser.code%>
@@ -145,7 +145,7 @@
                                 <ul id="existing-files-display">
                                     <% attachments.forEach(function(file) { %>
                                         <li>
-                                            <a href="/uploads/<%= file.filename %>" target="_blank">
+                                            <a href="/upload/<%= file.filename %>" target="_blank">
                                                 <%= file.original_name %>
                                             </a>
                                         </li>
@@ -177,7 +177,8 @@
                         <input type="checkbox" name="is_company" id="" <%=dataUser.is_company=='1' ? 'checked' : '' %> >
                         <span>Khách hàng tiềm năng là một tổ chức</span>
                     </div>
-                    <div class="content__row_two">
+
+                    <div class="content__row">
                         <div class="content__column_two">
                             <div class="title__column_two"><label for="">Mã số</label></div>
                             <div class="row_two__select">
@@ -255,7 +256,7 @@
                     </div>
                     <!-- cop -->
 
-                    <div class="content__row_two">
+                    <div class="content__row">
                         <div class="content__column_two">
                             <h4>Theo sát</h4>
                             <div class="title__column_two"><label for="">Liên hệ tiếp theo bằng</label></div>
@@ -276,8 +277,136 @@
                         </div>
                     </div>
 
-                    <div class="content__row_two">
+                    <div class="content__row">
+                        <div class="collapsible-section">
+                            <h2 class="section-title">
+                                Địa chỉ liên hệ
+                                <span class="toggle-icon">▼</span>
+                            </h2>
+                            <div class="section-content">
+                                <div class="content__column_two">
+                                    <div class="title__column_two"><label for="">Loại địa chỉ</label></div>
+                                    <div class="row_two__select">
+                                        <select name="address_type" id="">
+                                            <option value="payment" <%=dataUser.address_type==='payment' ? 'selected'
+                                                : '' %>
+                                                >Thanh toán</option>
+                                            <option value="shipping" <%=dataUser.address_type==='shipping' ? 'selected'
+                                                : '' %>
+                                                >vận chuyển</option>
+                                            <option value="office" <%=dataUser.address_type==='office' ? 'selected' : ''
+                                                %>>Văn
+                                                phòng</option>
+                                            <option value="personal" <%=dataUser.address_type==='personal' ? 'selected'
+                                                : '' %>
+                                                >Cá nhân</option>
+                                            <option value="factory" <%=dataUser.address_type==='factory' ? 'selected'
+                                                : '' %>
+                                                >Nhà máy</option>
+                                            <option value="postal" <%=dataUser.address_type==='postal' ? 'selected' : ''
+                                                %>>Bưu
+                                                chính</option>
+                                            <option value="store" <%=dataUser.address_type==='store' ? 'selected' : ''
+                                                %>>Cửa
+                                                hàng</option>
+                                            <option value="convert" <%=dataUser.address_type==='convert' ? 'selected'
+                                                : '' %>
+                                                >Chuyển đổi</option>
+                                            <option value="subsidiary" <%=dataUser.address_type==='subsidiary'
+                                                ? 'selected' : '' %>>Công ty con</option>
+                                            <option value="warehouse" <%=dataUser.address_type==='warehouse'
+                                                ? 'selected' : '' %>>Kho hàng</option>
+                                            <option value="current" <%=dataUser.address_type==='current' ? 'selected'
+                                                : '' %>
+                                                >Hiện tại</option>
+                                            <option value="longterm" <%=dataUser.address_type==='longterm' ? 'selected'
+                                                : '' %>
+                                                >Dài hạn</option>
+                                            <option value="other" <%=dataUser.address_type==='other' ? 'selected' : ''
+                                                %>>Khác
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="title__column_two"><label for="">Tên địa chỉ</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="address_name" id=""
+                                            value="<%= dataUser.address_name%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Địa chỉ line 1</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="street_address1" id=""
+                                            value="<%= dataUser.street_address1%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Địa chỉ line 2</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="street_address2" id=""
+                                            value="<%= dataUser.street_address2%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Thành phố / thị xã</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="city" id="" value="<%= dataUser.city%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Quận</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="district" id="" value="<%= dataUser.district%>">
+                                    </div>
+                                </div>
+
+
+                                <div class="content__column_two">
+                                    <div class="title__column_two"><label for="">Tiểu bang</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="state_province" id=""
+                                            value="<%= dataUser.state_province%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Quốc gia</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="country" id="" value="<%= dataUser.country%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">mã bưu chính</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="postal_code" id="" value="<%= dataUser.postal_code%>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liên lạc -->
+                    <div class="content__row">
                         <!-- Form 3 Ghi chú -->
+                        <div class="collapsible-section">
+                            <h2 class="section-title">
+                                Liên lạc
+                                <span class="toggle-icon">▼</span>
+                            </h2>
+                            <div class="section-content">
+
+                                <div class="content__column_two">
+                                    <div class="title__column_two"><label for="">Chuyển tiếp</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="forward" id="" value="<%= dataUser.forward%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Số điện thoại di động</label>
+                                    </div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="mobile_phone" id=""
+                                            value="<%= dataUser.mobile_phone%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Fax</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="fax" id="" value="<%= dataUser.fax%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Website</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="website" id="" value="<%=dataUser.website%>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__row-active">
                         <div class="collapsible-section">
                             <h2 class="section-title">
                                 Ghi Chú
@@ -289,167 +418,96 @@
                         </div>
                     </div>
 
-                    <div class="content__row_two">
-                        <div class="content__column_two">
-                            <div class="title__column_two"><label for="">Loại địa chỉ</label></div>
-                            <div class="row_two__select">
-                                <select name="address_type" id="">
-                                    <option value="payment" <%=dataUser.address_type==='payment' ? 'selected' : '' %>
-                                        >Thanh toán</option>
-                                    <option value="shipping" <%=dataUser.address_type==='shipping' ? 'selected' : '' %>
-                                        >vận chuyển</option>
-                                    <option value="office" <%=dataUser.address_type==='office' ? 'selected' : '' %>>Văn
-                                        phòng</option>
-                                    <option value="personal" <%=dataUser.address_type==='personal' ? 'selected' : '' %>
-                                        >Cá nhân</option>
-                                    <option value="factory" <%=dataUser.address_type==='factory' ? 'selected' : '' %>
-                                        >Nhà máy</option>
-                                    <option value="postal" <%=dataUser.address_type==='postal' ? 'selected' : '' %>>Bưu
-                                        chính</option>
-                                    <option value="store" <%=dataUser.address_type==='store' ? 'selected' : '' %>>Cửa
-                                        hàng</option>
-                                    <option value="convert" <%=dataUser.address_type==='convert' ? 'selected' : '' %>
-                                        >Chuyển đổi</option>
-                                    <option value="subsidiary" <%=dataUser.address_type==='subsidiary' ? 'selected' : ''
-                                        %>>Công ty con</option>
-                                    <option value="warehouse" <%=dataUser.address_type==='warehouse' ? 'selected' : ''
-                                        %>>Kho hàng</option>
-                                    <option value="current" <%=dataUser.address_type==='current' ? 'selected' : '' %>
-                                        >Hiện tại</option>
-                                    <option value="longterm" <%=dataUser.address_type==='longterm' ? 'selected' : '' %>
-                                        >Dài hạn</option>
-                                    <option value="other" <%=dataUser.address_type==='other' ? 'selected' : '' %>>Khác
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="title__column_two"><label for="">Tên địa chỉ</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="address_name" id="" value="<%= dataUser.address_name%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Địa chỉ line 1</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="street_address1" id="" value="<%= dataUser.street_address1%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Địa chỉ line 2</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="street_address2" id="" value="<%= dataUser.street_address2%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Thành phố / thị xã</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="city" id="" value="<%= dataUser.city%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Quận</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="district" id="" value="<%= dataUser.district%>">
-                            </div>
-                        </div>
+                    <!-- Thêm thông tin -->
+                    <div class="content__row-active">
+                        <div class="collapsible-section">
+                            <h2 class="section-title">
+                                <span class="toggle-icon">▼</span>
+                                Thêm thông tin
+                            </h2>
+                            <div class="section-content">
+                                <div class="content__column_two">
+                                    <div class="title__column_two"><label for="">Loại tiềm năng</label></div>
+                                    <div class="row_two__select">
+                                        <select name="lead_type" id="">
+                                            <option value="undefined" <%=dataUser.lead_type==='undefined' ? 'selected'
+                                                : '' %>>
+                                            </option>
+                                            <option value="customer" <%=dataUser.lead_type==='customer' ? 'selected'
+                                                : '' %>
+                                                >Khách hàng</option>
+                                            <option value="partner" <%=dataUser.lead_type==='partner' ? 'selected' : ''
+                                                %>
+                                                >Đối
+                                                tác</option>
+                                            <option value="adviser" <%=dataUser.lead_type==='adviser' ? 'selected' : ''
+                                                %>
+                                                >Tư
+                                                vấn</option>
+                                        </select>
+                                    </div>
+                                    <div class="title__column_two"><label for="">Phân khúc thị trường</label>
+                                    </div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="market_segment" id=""
+                                            value="<%= dataUser.market_segment%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Ngành công nghiệp</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="industry" id="" value="<%= dataUser.industry%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Yêu cầu loại</label></div>
+                                    <div class="row_two__select">
+                                        <select name="request_type" id="" value="<%= dataUser.request_type%>">
+                                            <option value="undefined" <%=dataUser.request_type==='undefined'
+                                                ? 'selected' : '' %>></option>
+                                            <option value="order" <%=dataUser.request_type==='order' ? 'selected' : ''
+                                                %>
+                                                >Đặt
+                                                hàng sản phẩm</option>
+                                            <option value="information_request"
+                                                <%=dataUser.request_type==='information_request' ? 'selected' : '' %>
+                                                >Yêu cầu thông tin</option>
+                                            <option value="propose" <%=dataUser.request_type==='propose' ? 'selected'
+                                                : '' %>>Đề
+                                                xuất</option>
+                                            <option value="other" <%=dataUser.request_type==='other' ? 'selected' : ''
+                                                %>
+                                                >Khác
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="content__column_two">
-                            <div class="title__column_two"><label for="">Tiểu bang</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="state_province" id="" value="<%= dataUser.state_province%>">
+                                <div class="content__column_two">
+                                    <div class="title__column_two"><label for="">Công ty</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="company" id="" value="<%= dataUser.company%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Quốc gia</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="nation" id="" value="<%= dataUser.nation%>">
+                                    </div>
+                                    <div class="title__column_two"><label for="">Ngôn ngữ in</label></div>
+                                    <div class="row_two__input">
+                                        <input type="text" name="print_language" id=""
+                                            value="<%= dataUser.print_language%>">
+                                    </div>
+                                    <div class="row_two__checkbox">
+                                        <input type="checkbox" name="unsubscribe" id="" <%=dataUser.unsubscribe=='1'
+                                            ? 'checked' : '' %> >
+                                        <label for="">Hủy đăng ký</label>
+                                    </div>
+                                    <div class="row_two__checkbox">
+                                        <input type="checkbox" name="followed_blog" id="" <%=dataUser.followed_blog=='1'
+                                            ? 'checked' : '' %> >
+                                        <label for="">Người theo dõi blog</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="title__column_two"><label for="">Quốc gia</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="country" id="" value="<%= dataUser.country%>">
-                            </div>
-                            <div class="title__column_two"><label for="">mã bưu chính</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="postal_code" id="" value="<%= dataUser.postal_code%>">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="content__row_two">
-                        <div class="content__column_two">
-                            <div class="title__column_two"><label for="">Chuyển tiếp</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="forward" id="" value="<%= dataUser.forward%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Số điện thoại di động</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="mobile_phone" id="" value="<%= dataUser.mobile_phone%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Fax</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="fax" id="" value="<%= dataUser.fax%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Website</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="website" id="" value="<%= dataUser.website%>">
-                            </div>
-                        </div>
-
-                        <div class="content__column_two">
-
                         </div>
                     </div>
 
-                    <div class="content__row_two">
-                        <div class="content__column_two">
-                            <div class="title__column_two"><label for="">Loại tiềm năng</label></div>
-                            <div class="row_two__select">
-                                <select name="lead_type" id="">
-                                    <option value="undefined" <%=dataUser.lead_type==='undefined' ? 'selected' : '' %>>
-                                    </option>
-                                    <option value="customer" <%=dataUser.lead_type==='customer' ? 'selected' : '' %>
-                                        >Khách hàng</option>
-                                    <option value="partner" <%=dataUser.lead_type==='partner' ? 'selected' : '' %>>Đối
-                                        tác</option>
-                                    <option value="adviser" <%=dataUser.lead_type==='adviser' ? 'selected' : '' %>>Tư
-                                        vấn</option>
-                                </select>
-                            </div>
-                            <div class="title__column_two"><label for="">Phân khúc thị trường</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="market_segment" id="" value="<%= dataUser.market_segment%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Ngành công nghiệp</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="industry" id="" value="<%= dataUser.industry%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Yêu cầu loại</label></div>
-                            <div class="row_two__select">
-                                <select name="request_type" id="" value="<%= dataUser.request_type%>">
-                                    <option value="undefined" <%=dataUser.request_type==='undefined' ? 'selected' : ''
-                                        %>></option>
-                                    <option value="order" <%=dataUser.request_type==='order' ? 'selected' : '' %>>Đặt
-                                        hàng sản phẩm</option>
-                                    <option value="information_request" <%=dataUser.request_type==='information_request'
-                                        ? 'selected' : '' %>>Yêu cầu thông tin</option>
-                                    <option value="propose" <%=dataUser.request_type==='propose' ? 'selected' : '' %>>Đề
-                                        xuất</option>
-                                    <option value="other" <%=dataUser.request_type==='other' ? 'selected' : '' %>>Khác
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="content__column_two">
-                            <div class="title__column_two"><label for="">Công ty</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="company" id="" value="<%= dataUser.company%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Quốc gia</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="nation" id="" value="<%= dataUser.nation%>">
-                            </div>
-                            <div class="title__column_two"><label for="">Ngôn ngữ in</label></div>
-                            <div class="row_two__input">
-                                <input type="text" name="print_language" id="" value="<%= dataUser.print_language%>">
-                            </div>
-                            <div class="row_two__checkbox">
-                                <input type="checkbox" name="unsubscribe" id="" <%=dataUser.unsubscribe=='1' ? 'checked'
-                                    : '' %> >
-                                <label for="">Hủy đăng ký</label>
-                            </div>
-                            <div class="row_two__checkbox">
-                                <input type="checkbox" name="followed_blog" id="" <%=dataUser.followed_blog=='1'
-                                    ? 'checked' : '' %> >
-                                <label for="">Người theo dõi blog</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <input type="text" value="<%= dataUser.id %>" hidden name="id" />
             </div>
