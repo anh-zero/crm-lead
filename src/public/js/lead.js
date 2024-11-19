@@ -11,6 +11,42 @@ function getSelectedLeadId() {
     }
 }
 
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const contentMain = document.querySelector('.content__main');
+    sidebar.classList.toggle('hide');
+    contentMain.classList.toggle('expand');
+}
+
+function copyURL() {
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            alert('Đã copy đường dẫn !');
+        })
+        .catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownBtn = document.querySelector('.dot');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    // Toggle dropdown on button click
+    dropdownBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdownContent.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!e.target.matches('.dot')) {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+            }
+        }
+    });
+});
+
 function getSelectedLeadIds() {
     const checkboxes = document.querySelectorAll('input[name="row-check"]:checked');
     const ids = Array.from(checkboxes).map(cb => cb.value);

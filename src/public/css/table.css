@@ -37,7 +37,7 @@ table.datatable th {
 .lead_data{
 	display: flex;
 	height: 100%;
-	max-width: 80%;
+	max-width: 100%;
 	background-color: #f4f5f6;
 	border-radius: 5px;
 	color: #333c44;

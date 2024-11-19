@@ -23,25 +23,25 @@ let showLeads = async (req, res) => {
 
     // Add conditions based on provided filters
     if (name && name.trim() !== '') {
-        conditions.push('name LIKE ?');
+        conditions.push('l.name LIKE ?');
         params.push(`%${name}%`);
     }
 
     if (status && status.trim() !== '') {
-        conditions.push('status = ?');
+        conditions.push('l.status = ?');
         params.push(status);
     }
 
     if (code && code.trim() !== '') {
-        conditions.push('code LIKE ?');
+        conditions.push('l.code LIKE ?');
         params.push(`%${code}%`);
     }
     if (created_by && created_by.trim() !== '') {
-        conditions.push('created_by = ?');
+        conditions.push('l.created_by = ?');
         params.push(created_by);
     }
     if (assigned_for && assigned_for.trim() !== '') {
-        conditions.push('assigned_for = ?');
+        conditions.push('l.assigned_for = ?');
         params.push(assigned_for);
     }
     if (tag && tag.trim() !== '') {
@@ -61,10 +61,10 @@ let showLeads = async (req, res) => {
     let sortOrder = req.query.sortOrder || 'DESC';
 
     // Sanitize inputs to prevent SQL injection
-    const allowedFields = ['updated_at', 'name', 'created_at', 'code', 'status', 'organization', 'owner', 'status', 'next_at', 'end_at'];
+    const allowedFields = ['l.updated_at', 'l.name', 'l.created_at', 'l.code', 'l.status', 'l.organization', 'l.owner', 'l.status', 'l.next_at', 'l.end_at'];
     const allowedOrders = ['ASC', 'DESC'];
     if (!allowedFields.includes(sortField)) {
-        sortField = 'updated_at';
+        sortField = 'l.updated_at';
     }
     if (!allowedOrders.includes(sortOrder)) {
         sortOrder = 'DESC';

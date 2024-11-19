@@ -63,7 +63,8 @@
                                     <li><a href="#">Demo</a></li> -->
                                     <li>
                                         <a href="#"
-                                            onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                                            onclick="document.getElementById('logoutForm').submit(); return false;">Đăng
+                                            xuất</a>
                                     </li>
                                 </ul>
                             </li>
@@ -98,7 +99,7 @@
                     <div class="sidebar__mobile">
                         <div class="sidebar__first">
                             <ul class="sidebar__list">
-                                <li class="sidebar__title">Lọc theo</li>
+                                <li class="sidebar__title">Được giao cho</li>
                                 <li class="sidebar__list-item">
                                     <select name="assigned_for" id="assigned_for" onchange="this.form.submit()">
                                         <option value="" <%=!query.assigned_for ? 'selected' : '' %>>Tất cả</option>
@@ -151,12 +152,20 @@
                     <div class="nav__second-r">
                         <button class="reset" type="button" id="refreshButton"><i
                                 class="fa-solid fa-rotate-right"></i></button>
-                        <button class="dot" type="submit">. . .</button>
+                        <!-- <button class="dot" type="submit">. . .</button> -->
+                        <div class="dropdown">
+                            <button class="dot" type="button">. . .</button>
+                            <div class="dropdown-content">
+                                <a class="hideshow" href="#" onclick="toggleSidebar()">Ẩn/Hiện Thanh Tác Vụ</a>
+                                <a class="copy" href="#" onclick="copyURL()">Chia sẻ URL</a>
+                            </div>
+                        </div>
                         <input class="taochiu" type="checkbox" name="" id="vcl" hidden>
                         <button class="add-KHTN" type="submit"><a href="/add-lead">+ Thêm Khách hàng tiềm
                                 năng</a></button>
                         <div class="action__insert_delete">
-                            <label for="action">Hành động <i class="fa-solid fa-chevron-down"></i></label>
+                            <label id="action_d_i" for="action">Hành động <i
+                                    class="fa-solid fa-chevron-down"></i></label>
                             <input type="checkbox" class="ohno_b_yes" id="action" hidden>
                             <label for="action" class="overlay2"></label>
                             <ul class="action">
@@ -205,7 +214,7 @@
                             <!-- <li class="sidebar__title-link"><a href="#">Chỉnh sửa bộ lọc</a></li> -->
                             <li class="sidebar__list-item">
                                 <label for="tag">Nhãn</label><br>
-                                <select name="tag" onchange="this.form.submit()">
+                                <select id="tag" name="tag" onchange="this.form.submit()">
                                     <option value="">Tất cả</option>
                                     <% tags.forEach(function(tag) { %>
                                         <option value="<%= tag %>" <%=query.tag===tag ? 'selected' : '' %>>
@@ -218,9 +227,9 @@
                             <li class="sidebar__title-link">
                                 <a href="#" onclick="toggleTagColumn(); return false;">Hiện nhãn</a>
                             </li>
-                            <li class="sidebar__list-item">
+                            <!-- <li class="sidebar__list-item">
                                 <a href="#">Nhãn<i class="fa-solid fa-chevron-down"></i></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
 

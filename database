@@ -75,13 +75,13 @@ CREATE TABLE `crm-lead`.`attachments` (
     FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
 );
 
-CREATE TABLE tags (
+CREATE TABLE `crm-lead`.`tags` (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE lead_tags (
+CREATE TABLE `crm-lead`.`lead_tags` (
   lead_id INT NOT NULL,
   tag_id INT NOT NULL,
   PRIMARY KEY (lead_id, tag_id),

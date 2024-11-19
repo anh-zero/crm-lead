@@ -317,18 +317,32 @@ nav {
     margin-bottom: 8px;
 }
 
-.up__file-item {
+.up__file-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: none;
     border-radius: 5px;
     margin-bottom: 8px;
     box-shadow: 0 0 1px 1px rgb(179, 177, 177);
+    padding: 3px 0;
+}
 
+.assignee-select {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    box-shadow: 0 0 1px 1px rgb(179, 177, 177);
+    padding: 3px 10px;
 }
 
 .up__file-item>label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3px 10px;
+    /* padding: 3px 10px; */
 }
 
 .file_input {
@@ -674,7 +688,7 @@ nav {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-width: 100%;
+    max-width: 50%;
 }
 
 #file-name-display li {

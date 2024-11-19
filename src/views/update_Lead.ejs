@@ -67,7 +67,7 @@
                                     <li><a href="#">Demo</a></li> -->
                                     <li>
                                         <a href="#"
-                                            onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                                            onclick="document.getElementById('logoutForm').submit(); return false;">Đăng xuất</a>
                                     </li>
                                 </ul>
                             </li>
@@ -130,7 +130,7 @@
                         <li class="file__title">Được giao cho</li>
                         <li class="file__link">
                             <select name="assigned_for" class="assignee-select" id="assigned_for">
-                                <option value="" <%=!dataUser.assigned_for ? 'selected' : '' %>>Select an user
+                                <option value="" <%=!dataUser.assigned_for ? 'selected' : '' %>>Chọn một người dùng
                                 </option>
                                 <% userEmails.forEach(function(email) { %>
                                     <option value="<%= email %>" <%=dataUser.assigned_for===email ? 'selected' : '' %>>
@@ -158,8 +158,7 @@
                         <ul id="file-name-display"></ul>
                         <li class="up__file-item">
                             <label for="attachments">
-                                <span>Tập tin đính kèm</span>
-                                <span>+</span>
+                                <span>Tập tin đính kèm +</span>
                             </label>
                             <input type="file" name="attachments" id="attachments" hidden multiple>
                         </li>
